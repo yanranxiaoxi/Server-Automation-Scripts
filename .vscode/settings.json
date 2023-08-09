@@ -1,0 +1,6 @@
+{
+    "shellformat.useEditorConfig": true,
+	"shellformat.flag": "-i=0 -ci -sr -kp",
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+}
