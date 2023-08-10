@@ -18,15 +18,15 @@ s3AccessKey=$3
 s3SecretKey=$4
 # S3 API 地址
 s3ApiAddress=$5
+# 是否首次安装，是则填写 'firstRun'，将会自动注册到 crontab
+firstRun=$6
 # 定时任务执行时刻：小时
-timerH=$6
+timerH=$7
 # 定时任务执行时刻：分钟
-timerM=$7
-# 是否首次安装，是则填写 'firstrun'，将会自动注册到 crontab
-firstRun=$8
+timerM=$8
 
 # 更新本地脚本
-yum install -y wget
+dnf install -y wget
 wget -O /"${containerType}"directorybackup/backup.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh
 
 # 自动生成归档路径信息
@@ -67,8 +67,8 @@ cd /"${containerType}"directorybackup/ || exit
 find . -type d | sed -n '2,$p' | xargs rm -rf
 
 # 创建系统定时任务
-if [[ ${firstRun} =~ "firstrun" ]]; then
-	cron="${timerM} ${timerH} * * * root sh /${containerType}directorybackup/backup.sh ${serverName} ${containerType} ${s3AccessKey} ${s3SecretKey} ${s3ApiAddress} ${timerH} ${timerM}"
+if [[ ${firstRun} =~ "firstRun" ]]; then
+	cron="${timerM} ${timerH} * * * root sh /${containerType}directorybackup/backup.sh ${serverName} ${containerType} ${s3AccessKey} ${s3SecretKey} ${s3ApiAddress}"
 	sed -i -e $'$a\\\n'"${cron}" /etc/crontab
 	systemctl restart crond
 fi
