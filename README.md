@@ -1,6 +1,6 @@
 # Server Automation Scripts
 
-小汐个人服务器自动化维护脚本，适用于 RHEL 8 & RHEL 9 及其兼容服务器
+小汐个人服务器自动化维护脚本，适用于 AlmaLinux 8 & AlmaLinux 9 及其兼容服务器
 
 ## 容器定制化 / Container
 

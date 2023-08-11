@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# caddy - autoSyncNiceCaddyfile
+# caddy2 - autoSyncNiceCaddyfile
 #
 # 自动同步 Nice Caddyfile 中的复用块
 #
