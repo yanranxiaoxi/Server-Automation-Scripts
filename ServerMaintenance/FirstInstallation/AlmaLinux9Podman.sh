@@ -15,8 +15,9 @@ prettyHostname=$2
 # Static Hostname
 staticHostName=$3
 
-if [[ test -z "${sshPublicKey}" || test -z "${prettyHostname}" || test -z "${staticHostName}" ]]; then
-	exit
+# 检查变量
+if [[ ! -n "${sshPublicKey}" || ! -n "${prettyHostname}" || ! -n "${staticHostName}" ]]; then
+    exit
 fi
 
 # 安装依赖程序
