@@ -50,17 +50,22 @@ hostnamectl set-hostname --pretty "${prettyHostname}"
 hostnamectl set-hostname --static "${staticHostName}"
 
 # 设置 DNS
-systemctl enable --now systemd-resolved.service
-mkdir -p /etc/systemd/
-if [ ! -f "/etc/systemd/resolved.conf" ]; then
-	echo "[Resolve]" >/etc/systemd/resolved.conf
-	echo "DNS=1.1.1.1" >>/etc/systemd/resolved.conf
-	echo "DNSOverTLS=yes" >>/etc/systemd/resolved.conf
-else
-	sed -i 's/#DNS=/DNS=1.1.1.1/g' /etc/systemd/resolved.conf
-	sed -i 's/#DNSOverTLS=no/DNSOverTLS=yes/g' /etc/systemd/resolved.conf
-fi
-systemctl restart systemd-resolved.service
+# systemctl enable --now systemd-resolved.service
+# mkdir -p /etc/systemd/
+# if [ ! -f "/etc/systemd/resolved.conf" ]; then
+# 	echo "[Resolve]" >/etc/systemd/resolved.conf
+# 	echo "DNS=1.1.1.1" >>/etc/systemd/resolved.conf
+# 	echo "DNSOverTLS=yes" >>/etc/systemd/resolved.conf
+# else
+# 	sed -i 's/#DNS=/DNS=1.1.1.1/g' /etc/systemd/resolved.conf
+# 	sed -i 's/#DNSOverTLS=no/DNSOverTLS=yes/g' /etc/systemd/resolved.conf
+# fi
+# sed -i 's/hosts: /#hosts: /g' /etc/nsswitch.conf
+# echo "hosts: files resolve dns myhostname mymachines" >>/etc/nsswitch.conf
+# systemctl restart systemd-resolved.service
+wget -O ~/setGoogle.sh https://sh.soraharu.com/ServerMaintenance/DNS/setGoogle.sh
+sh ~/setGoogle.sh
+rm -f ~/setGoogle.sh
 
 # 配置防火墙规则
 systemctl enable --now firewalld.service
