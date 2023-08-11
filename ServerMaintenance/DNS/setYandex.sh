@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# DNS - setCloudflare
+# DNS - setYandex
 #
-# 配置 DNS：Cloudflare
+# 配置 DNS：Yandex
 #
 # Author:	XiaoXi<admin@soraharu.com>
 # Website:	https://sh.soraharu.com/

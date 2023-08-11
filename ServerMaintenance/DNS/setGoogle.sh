@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# DNS - setAdGuard
+# DNS - setGoogle
 #
-# 配置 DNS：AdGuard
+# 配置 DNS：Google
 #
 # Author:	XiaoXi<admin@soraharu.com>
 # Website:	https://sh.soraharu.com/
