@@ -9,11 +9,15 @@
 # License:	MIT License
 
 # SSH 公钥
-sshPublicKey=$1 || exit
+sshPublicKey=$1
 # Pretty Hostname
-prettyHostname=$2 || exit
+prettyHostname=$2
 # Static Hostname
-staticHostName=$3 || exit
+staticHostName=$3
+
+if [ test -z "${sshPublicKey}" ] || [ test -z "${prettyHostname}" ] || [ test -z "${staticHostName}" ]; then
+	exit
+fi
 
 # 安装依赖程序
 dnf clean all
