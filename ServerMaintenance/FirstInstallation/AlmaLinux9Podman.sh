@@ -17,8 +17,8 @@ staticHostName=$3
 
 # 检查变量
 if [[ ! -n "${sshPublicKey}" || ! -n "${prettyHostname}" || ! -n "${staticHostName}" ]]; then
-    echo "错误：输入变量不正确"
-    exit
+	echo "错误：输入变量不正确"
+	exit
 fi
 
 # 安装依赖程序
@@ -60,6 +60,7 @@ else
 	sed -i 's/#DNS=/DNS=1.1.1.1/g' /etc/systemd/resolved.conf
 	sed -i 's/#DNSOverTLS=no/DNSOverTLS=yes/g' /etc/systemd/resolved.conf
 fi
+systemctl restart systemd-resolved.service
 
 # 配置防火墙规则
 systemctl enable --now firewalld.service
@@ -112,3 +113,5 @@ systemctl restart cockpit.socket
 
 # Podman 新建 IPv6 网关
 podman network create --ipv6 --gateway fd00::1:8:1 --subnet fd00::1:8:0/112 --gateway 10.90.0.1 --subnet 10.90.0.0/16 podman1
+
+echo "操作已完成，请检查后续步骤并尽快重启以应用所有配置"

@@ -17,6 +17,12 @@
 # 外部输入容器名称
 containerName=$1
 
+# 检查变量
+if [[ ! -n "${containerName}" ]]; then
+	echo "错误：输入变量不正确"
+	exit
+fi
+
 # 使用 Podman 生成 systemd 部署的必要文件
 # 这将在当前目录中生成文件
 podman generate systemd --new --name --files "${containerName}"

@@ -25,6 +25,18 @@ timerH=$7
 # 定时任务执行时刻：分钟
 timerM=$8
 
+# 检查变量
+if [[ ! -n "${serverName}" || ! -n "${containerType}" || ! -n "${s3AccessKey}" || ! -n "${s3SecretKey}" || ! -n "${s3ApiAddress}" ]]; then
+	echo "错误：输入变量不正确"
+	exit
+fi
+if [[ ${firstRun} =~ "firstRun" ]]; then
+	if [[ ! -n "${timerH}" || ! -n "${timerM}" ]]; then
+		echo "错误：输入变量不正确"
+		exit
+	fi
+fi
+
 # 更新本地脚本
 dnf install -y wget
 wget -O /"${containerType}"directorybackup/backup.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh

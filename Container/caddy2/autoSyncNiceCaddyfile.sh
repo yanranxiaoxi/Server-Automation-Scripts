@@ -13,6 +13,12 @@ containerType=$1
 # 是否首次安装，是则填写 'firstRun'，将会自动注册到 crontab
 firstRun=$2
 
+# 检查变量
+if [[ ! -n "${containerType}" ]]; then
+	echo "错误：输入变量不正确"
+	exit
+fi
+
 dnf install -y git
 
 if [ ! -f "/${containerType}directory/caddy2/config/reuse/README.md" ]; then

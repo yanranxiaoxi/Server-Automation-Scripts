@@ -11,6 +11,12 @@
 # 外部输入容器名称
 containerName=$1
 
+# 检查变量
+if [[ ! -n "${containerName}" ]]; then
+	echo "错误：输入变量不正确"
+	exit
+fi
+
 # 禁用服务
 systemctl disable container-"${containerName}"
 

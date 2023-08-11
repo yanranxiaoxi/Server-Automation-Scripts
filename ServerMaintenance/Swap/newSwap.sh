@@ -26,6 +26,15 @@ swapSize=$1
 # 交换文件位置，例如 '/swapfile'
 swapLocation=$2
 
+# 检查变量
+if [[ ! -n "${swapSize}" ]]; then
+	echo "错误：输入变量不正确"
+	exit
+fi
+if [[ ! -n "${swapLocation}" ]]; then
+	swapLocation="/swapfile"
+fi
+
 # 创建交换文件
 fallocate -l "${swapSize}" "${swapLocation}"
 

@@ -33,13 +33,20 @@ wget -O ~/AlmaLinux8Podman.sh https://sh.soraharu.com/ServerMaintenance/FirstIns
 脚本执行完成后续执行：
 
 1. 使用 `passwd` 修改 root 用户密码
-2. 在 Cockpit 设置语言为 中文（简体）
+2. 编辑 `/etc/motd` 以定义欢迎语
+3. 在 Cockpit 内开启内核补丁
 
 #### AlmaLinux 9 + Podman / AlmaLinux9Podman
 
 ```shell
 wget -O ~/AlmaLinux9Podman.sh https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux9Podman.sh && sh ~/AlmaLinux9Podman.sh "${sshPublicKey}" "${prettyHostname}" "${staticHostName}" && rm -f ~/AlmaLinux9Podman.sh
 ```
+
+脚本执行完成后续执行：
+
+1. 使用 `passwd` 修改 root 用户密码
+2. 编辑 `/etc/motd` 以定义欢迎语
+3. 在 Cockpit 内开启内核补丁
 
 ### Podman 容器管理 / Podman
 
