@@ -38,6 +38,10 @@ rm -f container-"${containerName}".service
 
 # 启用 Podman 自动更新定时器单元
 systemctl enable --now podman-auto-update.timer
+mkdir -p /etc/systemd/system/podman-auto-update.timer.d/
+echo "[Timer]" >/etc/systemd/system/podman-auto-update.timer.d/time.conf
+echo "OnBootSec=" >>/etc/systemd/system/podman-auto-update.timer.d/time.conf
+echo "OnCalendar=mon 01:00" >>/etc/systemd/system/podman-auto-update.timer.d/time.conf
+systemctl daemon-reload
 
-# 自动更新将于每天早晨自动运行，可以使用以下命令编辑定时器模块
-# systemctl edit podman-auto-update.timer
+# 自动更新将于每周一凌晨 1:00 自动运行

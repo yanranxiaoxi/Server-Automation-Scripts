@@ -9,11 +9,11 @@
 # License:	MIT License
 
 # SSH 公钥
-sshPublicKey=$1
+sshPublicKey=$1 || exit
 # Pretty Hostname
-prettyHostname=$2
+prettyHostname=$2 || exit
 # Static Hostname
-staticHostName=$3
+staticHostName=$3 || exit
 
 # 安装依赖程序
 dnf clean all
@@ -25,10 +25,10 @@ dnf install -y glibc-common langpacks-zh_CN dnf-automatic kpatch kpatch-dnf pass
 localectl set-locale "zh_CN.utf8"
 
 # 启用服务
-systemctl enable --now firewalld
+systemctl enable --now podman.socket
 systemctl enable --now cockpit.socket
 
-# 启用系统自动更新
+# 启用系统自动更新，于每周一凌晨 1:30 执行
 systemctl enable --now dnf-automatic-install.timer
 mkdir -p /etc/systemd/system/dnf-automatic-install.timer.d/
 echo "[Timer]" >/etc/systemd/system/dnf-automatic-install.timer.d/time.conf
@@ -43,7 +43,20 @@ dnf kpatch auto
 hostnamectl set-hostname --pretty "${prettyHostname}"
 hostnamectl set-hostname --static "${staticHostName}"
 
+# 设置 DNS
+systemctl enable --now systemd-resolved.service
+mkdir -p /etc/systemd/
+if [ ! -f "/etc/systemd/resolved.conf" ]; then
+	echo "[Resolve]" >/etc/systemd/resolved.conf
+	echo "DNS=1.1.1.1" >>/etc/systemd/resolved.conf
+	echo "DNSOverTLS=yes" >>/etc/systemd/resolved.conf
+else
+	sed -i 's/#DNS=/DNS=1.1.1.1/g' /etc/systemd/resolved.conf
+	sed -i 's/#DNSOverTLS=no/DNSOverTLS=yes/g' /etc/systemd/resolved.conf
+fi
+
 # 配置防火墙规则
+systemctl enable --now firewalld.service
 firewall-cmd --permanent --zone=public --add-service=cockpit && firewall-cmd --reload
 firewall-cmd --permanent --zone=public --add-service=http && firewall-cmd --reload
 firewall-cmd --permanent --zone=public --add-service=https && firewall-cmd --reload
@@ -59,7 +72,7 @@ firewall-cmd --reload
 # 修改 SSH 端口
 sed -i 's/#Port 22/Port 51200/g' /etc/ssh/sshd_config
 sed -i 's/Port 22/Port 51200/g' /etc/ssh/sshd_config
-systemctl restart sshd
+systemctl restart sshd.service
 
 # 修改 Cockpit 端口
 mkdir -p /etc/systemd/system/cockpit.socket.d/
@@ -72,7 +85,7 @@ systemctl restart cockpit.socket
 # 配置 SSH 公钥
 mkdir -p /root/.ssh/
 echo "${sshPublicKey}" >/root/.ssh/authorized_keys
-systemctl restart sshd
+systemctl restart sshd.service
 
 # 关闭 SELinux
 setenforce 0

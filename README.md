@@ -30,6 +30,11 @@ wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backu
 wget -O ~/AlmaLinux8Podman.sh https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux8Podman.sh && sh ~/AlmaLinux8Podman.sh "${sshPublicKey}" && rm -f ~/AlmaLinux8Podman.sh
 ```
 
+脚本执行完成后续执行：
+
+1. 使用 `passwd` 修改 root 用户密码
+2. 在 Cockpit 设置语言为 中文（简体）
+
 #### AlmaLinux 9 + Podman / AlmaLinux9Podman
 
 ```shell
