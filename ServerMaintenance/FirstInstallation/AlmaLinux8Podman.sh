@@ -2,7 +2,7 @@
 
 # FirstInstallation - AlmaLinux8Podman
 #
-# 初始化配置：AlmaLinux 8 + Podman
+# 操作系统初始化配置：AlmaLinux 8 + Podman
 #
 # Author:	XiaoXi<admin@soraharu.com>
 # Website:	https://sh.soraharu.com/
@@ -10,17 +10,38 @@
 
 # SSH 公钥
 sshPublicKey=$1
-
-# 取得 root 权限
-sudo -i
+# Pretty Hostname
+prettyHostname=$2
+# Static Hostname
+staticHostName=$3
 
 # 安装依赖程序
+dnf clean all
+dnf makecache
 dnf update -y
-dnf install -y passwd wget net-tools firewalld git cockpit cockpit-packagekit cockpit-storaged cockpit-podman netavark
+dnf install -y glibc-common langpacks-zh_CN dnf-automatic kpatch kpatch-dnf passwd wget net-tools firewalld git cockpit cockpit-packagekit cockpit-storaged cockpit-podman netavark
+
+# 设置系统语言为简体中文
+localectl set-locale "zh_CN.utf8"
 
 # 启用服务
 systemctl enable --now firewalld
 systemctl enable --now cockpit.socket
+
+# 启用系统自动更新
+systemctl enable --now dnf-automatic-install.timer
+mkdir -p /etc/systemd/system/dnf-automatic-install.timer.d/
+echo "[Timer]" >/etc/systemd/system/dnf-automatic-install.timer.d/time.conf
+echo "OnBootSec=" >>/etc/systemd/system/dnf-automatic-install.timer.d/time.conf
+echo "OnCalendar=mon 01:30" >>/etc/systemd/system/dnf-automatic-install.timer.d/time.conf
+systemctl daemon-reload
+
+# 启用内核实时补丁
+dnf kpatch auto
+
+# 设置主机名
+hostnamectl set-hostname --pretty "${prettyHostname}"
+hostnamectl set-hostname --static "${staticHostName}"
 
 # 配置防火墙规则
 firewall-cmd --permanent --zone=public --add-service=cockpit && firewall-cmd --reload
@@ -50,7 +71,9 @@ systemctl daemon-reload
 systemctl restart cockpit.socket
 
 # 配置 SSH 公钥
+mkdir -p /root/.ssh/
 echo "${sshPublicKey}" >/root/.ssh/authorized_keys
+systemctl restart sshd
 
 # 关闭 SELinux
 setenforce 0
@@ -60,7 +83,7 @@ sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 mkdir -p /podmandirectory/
 
 # 移除 Cockpit Web Console 提示
-rm -rf /etc/motd.d/cockpit
+rm -f /etc/motd.d/cockpit
 
 # 设置时区
 timedatectl set-timezone 'Asia/Shanghai'
@@ -68,7 +91,7 @@ timedatectl set-timezone 'Asia/Shanghai'
 # 将 Podman Network 移交给 Netavark 管理
 cp /usr/share/containers/containers.conf /etc/containers/containers.conf
 sed -i 's/network_backend = "cni"/network_backend = "netavark"/g' /etc/containers/containers.conf
-podman network reload
+systemctl restart podman
 
 # Podman 新建 IPv6 网关
 podman network create --ipv6 --gateway fd00::1:8:1 --subnet fd00::1:8:0/112 --gateway 10.90.0.1 --subnet 10.90.0.0/16 podman1

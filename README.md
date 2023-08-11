@@ -1,6 +1,6 @@
 # Server Automation Scripts
 
-小汐个人服务器自动化维护脚本，适用于 AlmaLinux 8 & AlmaLinux 9 及其兼容服务器
+小汐个人服务器自动化维护脚本，适用于 AlmaLinux 8 & AlmaLinux 9 及其兼容服务器，所有脚本均需以 root 权限运行
 
 ## 容器定制化 / Container
 
@@ -22,6 +22,20 @@ wget -O ~/autoSyncNiceCaddyfile.sh https://sh.soraharu.com/Container/caddy2/auto
 wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh "${serverName}" "${containerType}" "${s3AccessKey}" "${s3SecretKey}" "${s3ApiAddress}" "firstRun" "${timerH}" "${timerM}" && rm -f ~/backupContainerToS3.sh
 ```
 
+### 操作系统初始化配置 / FirstInstallation
+
+#### AlmaLinux 8 + Podman / AlmaLinux8Podman
+
+```shell
+wget -O ~/AlmaLinux8Podman.sh https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux8Podman.sh && sh ~/AlmaLinux8Podman.sh "${sshPublicKey}" && rm -f ~/AlmaLinux8Podman.sh
+```
+
+#### AlmaLinux 9 + Podman / AlmaLinux9Podman
+
+```shell
+wget -O ~/AlmaLinux9Podman.sh https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux9Podman.sh && sh ~/AlmaLinux9Podman.sh "${sshPublicKey}" && rm -f ~/AlmaLinux9Podman.sh
+```
+
 ### Podman 容器管理 / Podman
 
 #### 禁用自动升级定时器 / disableAutoUpdateTimer
@@ -40,4 +54,12 @@ wget -O ~/newAutoUpdateContainer.sh https://sh.soraharu.com/ServerMaintenance/Po
 
 ```shell
 wget -O ~/removeAutoUpdateContainer.sh https://sh.soraharu.com/ServerMaintenance/Podman/removeAutoUpdateContainer.sh && sh ~/removeAutoUpdateContainer.sh "${containerName}" && rm -f ~/removeAutoUpdateContainer.sh
+```
+
+### Swap 管理 / Swap
+
+#### 新建 Swap
+
+```shell
+
 ```
