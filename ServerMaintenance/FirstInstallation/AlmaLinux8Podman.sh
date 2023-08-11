@@ -63,7 +63,9 @@ hostnamectl set-hostname --static "${staticHostName}"
 # sed -i 's/hosts: /#hosts: /g' /etc/nsswitch.conf
 # echo "hosts: files resolve dns myhostname mymachines" >>/etc/nsswitch.conf
 # systemctl restart systemd-resolved.service
-
+wget -O ~/setGoogle.sh https://sh.soraharu.com/ServerMaintenance/DNS/setGoogle.sh
+sh ~/setGoogle.sh
+rm -f ~/setGoogle.sh
 
 # 配置防火墙规则
 systemctl enable --now firewalld.service
