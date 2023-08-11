@@ -17,6 +17,7 @@ staticHostName=$3
 
 # 检查变量
 if [[ ! -n "${sshPublicKey}" || ! -n "${prettyHostname}" || ! -n "${staticHostName}" ]]; then
+    echo "错误：输入变量不正确"
     exit
 fi
 
