@@ -15,7 +15,7 @@ prettyHostname=$2
 # Static Hostname
 staticHostName=$3
 
-if [ test -z "${sshPublicKey}" ] || [ test -z "${prettyHostname}" ] || [ test -z "${staticHostName}" ]; then
+if [[ test -z "${sshPublicKey}" || test -z "${prettyHostname}" || test -z "${staticHostName}" ]]; then
 	exit
 fi
 
