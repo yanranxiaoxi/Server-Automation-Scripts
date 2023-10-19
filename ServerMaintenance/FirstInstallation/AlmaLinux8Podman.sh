@@ -45,6 +45,9 @@ systemctl daemon-reload
 # 启用内核实时补丁
 dnf kpatch auto
 
+# 移除 Virtio-Balloon 驱动
+rmmod virtio_balloon
+
 # 设置主机名
 hostnamectl set-hostname --pretty "${prettyHostname}"
 hostnamectl set-hostname --static "${staticHostName}"
