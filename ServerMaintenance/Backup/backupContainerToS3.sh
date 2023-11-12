@@ -39,6 +39,7 @@ fi
 
 # 更新本地脚本
 dnf install -y wget
+mkdir -p /"${containerType}"directorybackup/
 wget -O /"${containerType}"directorybackup/backup.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh
 
 # 自动生成归档路径信息
