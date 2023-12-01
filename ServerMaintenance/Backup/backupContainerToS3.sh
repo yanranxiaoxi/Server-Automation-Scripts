@@ -37,10 +37,8 @@ if [[ ${firstRun} =~ "firstRun" ]]; then
 	fi
 fi
 
-# 更新本地脚本
-dnf install -y wget
+# 新建备份目录
 mkdir -p /"${containerType}"directorybackup/
-wget -O /"${containerType}"directorybackup/backup.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh
 
 # 自动生成归档路径信息
 backupDate=$(date "+%Y%m%d%H%M%S")
@@ -81,7 +79,7 @@ find . -type d | sed -n '2,$p' | xargs rm -rf
 
 # 创建系统定时任务
 if [[ ${firstRun} =~ "firstRun" ]]; then
-	cron="${timerM} ${timerH} * * * root sh /${containerType}directorybackup/backup.sh ${serverName} ${containerType} ${s3AccessKey} ${s3SecretKey} ${s3ApiAddress}"
+	cron="${timerM} ${timerH} * * * root wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh ${serverName} ${containerType} ${s3AccessKey} ${s3SecretKey} ${s3ApiAddress} && rm -f ~/backupContainerToS3.sh"
 	sed -i -e $'$a\\\n'"${cron}" /etc/crontab
 	systemctl restart crond
 fi
