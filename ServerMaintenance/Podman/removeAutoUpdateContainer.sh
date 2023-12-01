@@ -31,4 +31,4 @@ podman container rm -f "${containerName}"
 
 # 清理镜像
 # 清理镜像时还会同时清理掉已停止的其他容器及其镜像，这在正常情况下并不会导致问题
-podman system prune -a -f
+podman system prune --external -f
