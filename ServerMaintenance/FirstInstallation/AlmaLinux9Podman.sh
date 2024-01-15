@@ -72,11 +72,11 @@ rm -f ~/setGoogle.sh
 
 # 配置防火墙规则
 systemctl enable --now firewalld.service
-firewall-cmd --permanent --zone=public --add-service=cockpit && firewall-cmd --reload
-firewall-cmd --permanent --zone=public --add-service=http && firewall-cmd --reload
-firewall-cmd --permanent --zone=public --add-service=https && firewall-cmd --reload
-firewall-cmd --permanent --zone=public --add-service=http3 && firewall-cmd --reload
-firewall-cmd --permanent --new-service=podman-container
+firewall-cmd --permanent --zone=public --add-service=cockpit
+firewall-cmd --permanent --zone=public --add-service=http
+firewall-cmd --permanent --zone=public --add-service=https
+firewall-cmd --permanent --zone=public --add-service=http3
+firewall-cmd --permanent --zone=public --new-service=podman-container
 firewall-cmd --permanent --service=podman-container --add-port=51300-51399/tcp --add-port=51300-51399/udp
 firewall-cmd --permanent --service=ssh --add-port=51200/tcp
 firewall-cmd --permanent --service=ssh --remove-port=22/tcp
