@@ -55,7 +55,7 @@ setenforce 0
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 
 # 安装 MySQL
-dnf install -y mysql mysql-server
+dnf install -y mysql-server
 systemctl enable --now mysqld
 systemctl start mysqld
 
@@ -64,3 +64,7 @@ dnf install -y nodejs
 
 # 安装 pm2
 npm install pm2 -g
+pm2 -v >/dev/null
+
+#
+pm2 startup
