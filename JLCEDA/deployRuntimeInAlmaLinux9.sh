@@ -7,25 +7,28 @@ if [ ! -f "/eda-server/package/*-pro-*" ]; then
     exit
 fi
 
-echo "请输入访问域名或 IP（默认：127.0.0.1）："
-read readDomainName
+read -p "请输入访问域名或 IP（默认：127.0.0.1）：" readDomainName
 
-echo "请提供 .ecrt 文件路径以启用 HTTPS 访问（不提供则不启用 HTTPS）："
-read readEcrtPath
+read -p "请提供 .ecrt 文件路径以启用 HTTPS 访问（不提供则不启用 HTTPS）：" readEcrtPath
+
+echo "设置服务监听端口（）"
 
 echo "请提供数据目录（默认：/eda-server/data/）："
 read readDataUri
 
 # 安装前提示
-echo "本自动化脚本将会为您安装嘉立创 EDA 专业版私有化部署版本及其依赖组件，请确认是否开始安装？ (y/n)"
-read isReadyToInstall
-if [ ! [ ${isReadyToInstall} =~ "y" ]]; then
-    if [[ ${isReadyToInstall} =~ "n" ]]; then
-        exit
-    fi
-    # 重新提示或退出
+read -p "本自动化脚本将会为您安装嘉立创 EDA 专业版私有化部署版本及其依赖组件，请确认是否开始安装？ [Yes/No]" isReadyToInstall
+case ${isReadyToInstall} in
+Yes | yes | Y | y)
+    ;;
+No | no | N | n)
     exit
-fi
+    ;;
+*)
+    # 错误输入也退出
+    exit
+    ;;
+esac
 
 # 安装依赖程序
 dnf clean all
