@@ -70,7 +70,7 @@ wget -O ~/removeAutoUpdateContainer.sh https://sh.soraharu.com/ServerMaintenance
 
 ### Swap 管理 / Swap
 
-#### 新建 Swap
+#### 新建 Swap / newSwap
 
 ```shell
 wget -O ~/newSwap.sh https://sh.soraharu.com/ServerMaintenance/Swap/newSwap.sh && sh ~/newSwap.sh "${swapSize}" "/swapfile" && rm -f ~/newSwap.sh
