@@ -13,10 +13,10 @@ sshPublicKey=$1
 # Pretty Hostname
 prettyHostname=$2
 # Static Hostname
-staticHostName=$3
+staticHostname=$3
 
 # 检查变量
-if [[ ! -n "${sshPublicKey}" || ! -n "${prettyHostname}" || ! -n "${staticHostName}" ]]; then
+if [[ ! -n "${sshPublicKey}" || ! -n "${prettyHostname}" || ! -n "${staticHostname}" ]]; then
 	echo "错误：输入变量不正确"
 	exit
 fi
@@ -50,7 +50,7 @@ rmmod virtio_balloon
 
 # 设置主机名
 hostnamectl set-hostname --pretty "${prettyHostname}"
-hostnamectl set-hostname --static "${staticHostName}"
+hostnamectl set-hostname --static "${staticHostname}"
 
 # 设置 DNS
 # systemctl enable --now systemd-resolved.service

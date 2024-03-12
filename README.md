@@ -27,7 +27,7 @@ wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backu
 #### AlmaLinux 8 + Podman / AlmaLinux8Podman
 
 ```shell
-wget -O ~/AlmaLinux8Podman.sh https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux8Podman.sh && sh ~/AlmaLinux8Podman.sh "${sshPublicKey}" "${prettyHostname}" "${staticHostName}" && rm -f ~/AlmaLinux8Podman.sh
+wget -O ~/AlmaLinux8Podman.sh https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux8Podman.sh && sh ~/AlmaLinux8Podman.sh "${sshPublicKey}" "${prettyHostname}" "${staticHostname}" && rm -f ~/AlmaLinux8Podman.sh
 ```
 
 脚本执行完成后续执行：
@@ -39,7 +39,7 @@ wget -O ~/AlmaLinux8Podman.sh https://sh.soraharu.com/ServerMaintenance/FirstIns
 #### AlmaLinux 9 + Podman / AlmaLinux9Podman
 
 ```shell
-wget -O ~/AlmaLinux9Podman.sh https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux9Podman.sh && sh ~/AlmaLinux9Podman.sh "${sshPublicKey}" "${prettyHostname}" "${staticHostName}" && rm -f ~/AlmaLinux9Podman.sh
+wget -O ~/AlmaLinux9Podman.sh https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux9Podman.sh && sh ~/AlmaLinux9Podman.sh "${sshPublicKey}" "${prettyHostname}" "${staticHostname}" && rm -f ~/AlmaLinux9Podman.sh
 ```
 
 脚本执行完成后续执行：
@@ -73,5 +73,5 @@ wget -O ~/removeAutoUpdateContainer.sh https://sh.soraharu.com/ServerMaintenance
 #### 新建 Swap
 
 ```shell
-
+wget -O ~/newSwap.sh https://sh.soraharu.com/ServerMaintenance/Swap/newSwap.sh && sh ~/newSwap.sh "${swapSize}" "/swapfile" && rm -f ~/newSwap.sh
 ```
