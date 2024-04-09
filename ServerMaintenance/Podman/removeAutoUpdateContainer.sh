@@ -12,7 +12,7 @@
 containerName=$1
 
 # 检查变量
-if [[ ! -n "${containerName}" ]]; then
+if [[ -z "${containerName}" ]]; then
 	echo "错误：输入变量不正确"
 	exit
 fi

@@ -27,11 +27,11 @@ swapSize=$1
 swapLocation=$2
 
 # 检查变量
-if [[ ! -n "${swapSize}" ]]; then
+if [[ -z "${swapSize}" ]]; then
 	echo "错误：输入变量不正确"
 	exit
 fi
-if [[ ! -n "${swapLocation}" ]]; then
+if [[ -z "${swapLocation}" ]]; then
 	swapLocation="/swapfile"
 fi
 

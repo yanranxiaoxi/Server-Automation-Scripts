@@ -26,12 +26,12 @@ timerH=$7
 timerM=$8
 
 # 检查变量
-if [[ ! -n "${serverName}" || ! -n "${containerType}" || ! -n "${s3AccessKey}" || ! -n "${s3SecretKey}" || ! -n "${s3ApiAddress}" ]]; then
+if [[ -z "${serverName}" || -z "${containerType}" || -z "${s3AccessKey}" || -z "${s3SecretKey}" || -z "${s3ApiAddress}" ]]; then
 	echo "错误：输入变量不正确"
 	exit
 fi
 if [[ ${firstRun} =~ "firstRun" ]]; then
-	if [[ ! -n "${timerH}" || ! -n "${timerM}" ]]; then
+	if [[ -z "${timerH}" || -z "${timerM}" ]]; then
 		echo "错误：输入变量不正确"
 		exit
 	fi

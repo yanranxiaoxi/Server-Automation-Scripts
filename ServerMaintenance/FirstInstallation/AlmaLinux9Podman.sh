@@ -16,7 +16,7 @@ prettyHostname=$2
 staticHostname=$3
 
 # 检查变量
-if [[ ! -n "${sshPublicKey}" || ! -n "${prettyHostname}" || ! -n "${staticHostname}" ]]; then
+if [[ -z "${sshPublicKey}" || -z "${prettyHostname}" || -z "${staticHostname}" ]]; then
 	echo "错误：输入变量不正确"
 	exit
 fi
@@ -25,7 +25,7 @@ fi
 dnf clean all
 dnf makecache
 dnf update -y
-dnf install -y glibc-common langpacks-zh_CN dnf-automatic kpatch kpatch-dnf passwd wget net-tools firewalld git cockpit cockpit-packagekit cockpit-storaged cockpit-podman
+dnf install -y glibc-common langpacks-zh_CN dnf-automatic kpatch kpatch-dnf passwd wget net-tools firewalld fail2ban git cockpit cockpit-packagekit cockpit-storaged cockpit-podman
 
 # 设置系统语言为简体中文
 localectl set-locale "zh_CN.utf8"
@@ -33,6 +33,7 @@ localectl set-locale "zh_CN.utf8"
 # 启用服务
 systemctl enable --now podman.socket
 systemctl enable --now cockpit.socket
+systemctl enable --now fail2ban.service
 
 # 启用系统自动更新，于每周一凌晨 1:30 执行
 systemctl enable --now dnf-automatic-install.timer
@@ -84,10 +85,8 @@ firewall-cmd --permanent --service=cockpit --add-port=51201/tcp
 firewall-cmd --permanent --service=cockpit --remove-port=9090/tcp
 firewall-cmd --reload
 
-# 修改 SSH 端口
-sed -i 's/#Port 22/Port 51200/g' /etc/ssh/sshd_config
-sed -i 's/Port 22/Port 51200/g' /etc/ssh/sshd_config
-systemctl restart sshd.service
+# 允许 root 用户登录 Cockpit
+echo "# List of users which are not allowed to login to Cockpit" >/etc/cockpit/disallowed-users
 
 # 修改 Cockpit 端口
 mkdir -p /etc/systemd/system/cockpit.socket.d/
@@ -97,9 +96,20 @@ echo "ListenStream=51201" >>/etc/systemd/system/cockpit.socket.d/override.conf
 systemctl daemon-reload
 systemctl restart cockpit.socket
 
+# 修改 SSH 端口
+sed -i 's/#Port 22/Port 51200/g' /etc/ssh/sshd_config
+sed -i 's/Port 22/Port 51200/g' /etc/ssh/sshd_config
+
 # 配置 SSH 公钥
 mkdir -p /root/.ssh/
 echo "${sshPublicKey}" >/root/.ssh/authorized_keys
+
+# 配置 SSH 禁止密码登录
+if [[ "$(grep -c 'PasswordAuthentication ' '/etc/ssh/sshd_config')" -eq '1' && "$(grep -c '#PasswordAuthentication yes' '/etc/ssh/sshd_config')" -eq '1' ]]; then
+	sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
+else
+	sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
+fi
 systemctl restart sshd.service
 
 # 关闭 SELinux
@@ -115,10 +125,6 @@ rm -f /etc/motd.d/cockpit
 # 设置时区
 timedatectl set-timezone 'Asia/Shanghai'
 
-# 允许 root 用户登录 Cockpit
-echo "# List of users which are not allowed to login to Cockpit" >/etc/cockpit/disallowed-users
-systemctl restart cockpit.socket
-
 # 进行 Podman 设置
 cp /usr/share/containers/containers.conf /etc/containers/containers.conf
 # 设置最大日志大小为 10MiB
@@ -127,5 +133,11 @@ systemctl restart podman.socket
 
 # Podman 新建 IPv6 网关
 podman network create --ipv6 --gateway fd00::1:8:1 --subnet fd00::1:8:0/112 --gateway 10.90.0.1 --subnet 10.90.0.0/16 podman1
+
+# 使用 OSC 1337 协议向远程 shell 报告 CWD
+if [ "$(grep -c 'export PS1=' '/root/.bash_profile')" -eq '0' ]; then
+	# echo "export PS1=\"\$PS1\\[\\e]1337;CurrentDir=\"'\$(pwd)\\a\\]'" >>/root/.bash_profile
+	printf "export PS1=\"\$PS1\\[\\\e]1337;CurrentDir=\"'\$(pwd)\\\a\\]'" >>/root/.bash_profile
+fi
 
 echo "操作已完成，请检查后续步骤并尽快重启以应用所有配置"

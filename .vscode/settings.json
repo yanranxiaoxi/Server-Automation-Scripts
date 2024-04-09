@@ -4,6 +4,7 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "foxundermoon.shell-format",
     "cSpell.words": [
-        "Caddyfile"
+        "Caddyfile",
+        "swapfile"
     ]
 }

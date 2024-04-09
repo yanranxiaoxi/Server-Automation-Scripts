@@ -14,7 +14,7 @@ containerType=$1
 firstRun=$2
 
 # 检查变量
-if [[ ! -n "${containerType}" ]]; then
+if [[ -z "${containerType}" ]]; then
 	echo "错误：输入变量不正确"
 	exit
 fi
