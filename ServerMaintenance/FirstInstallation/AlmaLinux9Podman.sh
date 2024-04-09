@@ -119,6 +119,12 @@ timedatectl set-timezone 'Asia/Shanghai'
 echo "# List of users which are not allowed to login to Cockpit" >/etc/cockpit/disallowed-users
 systemctl restart cockpit.socket
 
+# 进行 Podman 设置
+cp /usr/share/containers/containers.conf /etc/containers/containers.conf
+# 设置最大日志大小为 10MiB
+sed -i 's/#log_size_max = -1/log_size_max = 10485760/g' /etc/containers/containers.conf
+systemctl restart podman.socket
+
 # Podman 新建 IPv6 网关
 podman network create --ipv6 --gateway fd00::1:8:1 --subnet fd00::1:8:0/112 --gateway 10.90.0.1 --subnet 10.90.0.0/16 podman1
 

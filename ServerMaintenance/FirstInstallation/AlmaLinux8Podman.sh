@@ -116,8 +116,11 @@ rm -f /etc/motd.d/cockpit
 # 设置时区
 timedatectl set-timezone 'Asia/Shanghai'
 
-# 将 Podman Network 移交给 Netavark 管理
+# 进行 Podman 设置
 cp /usr/share/containers/containers.conf /etc/containers/containers.conf
+# 设置最大日志大小为 10MiB
+sed -i 's/#log_size_max = -1/log_size_max = 10485760/g' /etc/containers/containers.conf
+# 将 Podman Network 移交给 Netavark 管理
 sed -i 's/network_backend = "cni"/network_backend = "netavark"/g' /etc/containers/containers.conf
 systemctl restart podman.socket
 
