@@ -32,7 +32,6 @@ dnf clean all
 dnf makecache
 dnf update -y
 dnf install -y glibc-common langpacks-zh_CN dnf-automatic kpatch kpatch-dnf passwd wget net-tools firewalld git cockpit cockpit-packagekit cockpit-storaged cockpit-podman
-# dnf install -y fail2ban
 
 # 设置系统语言为简体中文
 localectl set-locale "zh_CN.utf8"
@@ -40,7 +39,6 @@ localectl set-locale "zh_CN.utf8"
 # 启用服务
 systemctl enable --now podman.socket
 systemctl enable --now cockpit.socket
-# systemctl enable --now fail2ban.service
 
 # 启用系统自动更新，于每周一凌晨 1:30 执行
 systemctl enable --now dnf-automatic-install.timer

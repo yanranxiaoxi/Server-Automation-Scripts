@@ -6,9 +6,6 @@ if [ ! "$(grep -c ' release 8.' '/etc/redhat-release')" -eq '1' ]; then
 	exit
 fi
 
-dnf install -y fail2ban
-systemctl enable --now fail2ban.service
-
 if [[ "$(grep -c 'PasswordAuthentication ' '/etc/ssh/sshd_config')" -eq '1' && "$(grep -c '#PasswordAuthentication yes' '/etc/ssh/sshd_config')" -eq '1' ]]; then
 	sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
 else
