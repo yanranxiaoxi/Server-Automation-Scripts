@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# 检测操作系统版本
+if [ ! "$(grep -c ' release 8.' '/etc/redhat-release')" -eq '1' ]; then
+	echo "错误：操作系统版本非 RHEL 8 like"
+	exit
+fi
+
 dnf install -y fail2ban
 systemctl enable --now fail2ban.service
 
