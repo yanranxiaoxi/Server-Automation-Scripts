@@ -28,7 +28,7 @@ else
 	git reset --hard
 	git pull
 fi
-systemctl restart container-caddy2
+# systemctl restart container-caddy2
 
 # 创建系统定时任务
 if [[ ${firstRun} =~ "firstRun" ]]; then
