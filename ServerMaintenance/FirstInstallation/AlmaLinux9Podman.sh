@@ -31,7 +31,7 @@ fi
 dnf clean all
 dnf makecache
 dnf update -y
-dnf install -y glibc-common langpacks-zh_CN dnf-automatic kpatch kpatch-dnf passwd wget net-tools firewalld git cockpit cockpit-packagekit cockpit-storaged cockpit-podman
+dnf install -y glibc-common langpacks-zh_CN dnf-automatic kpatch kpatch-dnf passwd wget net-tools firewalld git cockpit cockpit-packagekit cockpit-storaged cockpit-podman zsh util-linux-user
 
 # 设置系统语言为简体中文
 localectl set-locale "zh_CN.utf8"
@@ -132,7 +132,8 @@ timedatectl set-timezone 'Asia/Shanghai'
 
 # 进行 Podman 设置
 cp /usr/share/containers/containers.conf /etc/containers/containers.conf
-# 设置最大日志大小为 10MiB
+
+# 设置 Podman 最大日志大小为 10MiB
 sed -i 's/#log_size_max = -1/log_size_max = 10485760/g' /etc/containers/containers.conf
 systemctl restart podman.socket
 
@@ -144,5 +145,15 @@ if [ "$(grep -c 'export PS1=' '/root/.bash_profile')" -eq '0' ]; then
 	# echo "export PS1=\"\$PS1\\[\\e]1337;CurrentDir=\"'\$(pwd)\\a\\]'" >>/root/.bash_profile
 	printf "export PS1=\"\$PS1\\[\\\e]1337;CurrentDir=\"'\$(pwd)\\\a\\]'" >>/root/.bash_profile
 fi
+
+# 将默认 Shell 设置为 Zsh
+chsh -s $(which zsh)
+
+# 安装 Oh My Zsh
+sh -c "$(wget -O- https://install.ohmyz.sh)" "" --unattended
+
+# 开启 Oh My Zsh 自动更新
+sed -i "s/# zstyle ':omz:update' mode auto/zstyle ':omz:update' mode auto/g" ~/.zshrc
+zsh
 
 echo "操作已完成，请检查后续步骤并尽快重启以应用所有配置"
