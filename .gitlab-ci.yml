@@ -1,0 +1,21 @@
+stages:
+  - deploy
+
+#########################
+#        Deploy         #
+#########################
+
+pages:
+  stage: deploy
+  tags:
+    - linux
+    - docker
+  image: docker.io/library/busybox:latest
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+  script:
+    - mkdir ./public/
+    - cp -r ./Container/ ./ServerMaintenance/ ./Temp/ ./public/
+  artifacts:
+    paths:
+      - ./public/
