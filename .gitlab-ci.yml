@@ -15,7 +15,7 @@ pages:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
   script:
     - mkdir ./public/
-    - cp -r ./Container/ ./ServerMaintenance/ ./Temp/ ./public/
+    - cp -r ./Container/ ./PublicKey/ ./ServerMaintenance/ ./Temp/ ./public/
   artifacts:
     paths:
       - ./public/
