@@ -19,7 +19,7 @@ wget -O ~/autoSyncNiceCaddyfile.sh https://sh.soraharu.com/Container/caddy2/auto
 #### 将容器目录备份到 S3 / backupContainerToS3
 
 ```shell
-wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh "${serverName}" "${containerType}" "${s3AccessKey}" "${s3SecretKey}" "${s3ApiAddress}" "${s3StorageClass}" "firstRun" "${timerH}" "${timerM}" && rm -f ~/backupContainerToS3.sh
+wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh "${serverName}" "${containerType}" "${s3AccessKey}" "${s3SecretKey}" "${s3ApiAddress}" "${s3BucketName}" "${s3StorageClass}" "firstRun" "${timerH}" "${timerM}" && rm -f ~/backupContainerToS3.sh
 ```
 
 ### 操作系统初始化配置 / FirstInstallation

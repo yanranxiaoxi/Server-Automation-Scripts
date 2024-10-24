@@ -18,14 +18,16 @@ s3AccessKey=$3
 s3SecretKey=$4
 # S3 API 地址
 s3ApiAddress=$5
-# 存储类
-s3StorageClass=$6
+# S3 桶名称
+s3BucketName=$6
+# S3 存储类
+s3StorageClass=$7
 # 是否首次安装，是则填写 'firstRun'，将会自动注册到 crontab
-firstRun=$7
+firstRun=$8
 # 定时任务执行时刻：小时
-timerH=$8
+timerH=$9
 # 定时任务执行时刻：分钟
-timerM=$9
+timerM=$10
 
 # 检查变量
 if [[ -z "${serverName}" || -z "${containerType}" || -z "${s3AccessKey}" || -z "${s3SecretKey}" || -z "${s3ApiAddress}" ]]; then
@@ -37,6 +39,9 @@ if [[ ${firstRun} =~ "firstRun" ]]; then
 		echo "错误：输入变量不正确"
 		exit
 	fi
+fi
+if [[ -z "${s3BucketName}" ]]; then
+	s3BucketName="backup-container"
 fi
 if [[ -z "${s3StorageClass}" ]]; then
 	s3StorageClass="Standard"
@@ -78,14 +83,14 @@ fi
 # 使用 MinIO Client 将数据上传到 S3 服务器
 cd /"${containerType}"directorybackup/ || exit
 ./mc alias set "${serverName}" "${s3ApiAddress}" "${s3AccessKey}" "${s3SecretKey}"
-./mc cp --recursive --storage-class=${s3StorageClass} /"${containerType}"directorybackup/"${backupDay}"/ "${serverName}"/backup-container/"${serverName}"/"${backupDay}"/
+./mc cp --recursive --storage-class=${s3StorageClass} /"${containerType}"directorybackup/"${backupDay}"/ "${serverName}"/${s3BucketName}/"${serverName}"/"${backupDay}"/
 
 # 清理文件
 find . -type d | sed -n '2,$p' | xargs rm -rf
 
 # 创建系统定时任务
 if [[ ${firstRun} =~ "firstRun" ]]; then
-	cron="${timerM} ${timerH} * * * root wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh ${serverName} ${containerType} ${s3AccessKey} ${s3SecretKey} ${s3ApiAddress} ${s3StorageClass} && rm -f ~/backupContainerToS3.sh"
+	cron="${timerM} ${timerH} * * * root wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh ${serverName} ${containerType} ${s3AccessKey} ${s3SecretKey} ${s3ApiAddress} ${s3BucketName} ${s3StorageClass} && rm -f ~/backupContainerToS3.sh"
 	sed -i -e $'$a\\\n'"${cron}" /etc/crontab
 	systemctl restart crond
 fi
