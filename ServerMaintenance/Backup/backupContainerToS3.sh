@@ -85,8 +85,8 @@ find . -type d | sed -n '2,$p' | xargs rm -rf
 
 # 创建系统定时任务
 if [[ ${firstRun} =~ "firstRun" ]]; then
-	cron="${timer} root wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh ${serverName} ${containerType} ${s3AccessKey} ${s3SecretKey} ${s3ApiAddress} ${s3BucketName} ${s3StorageClass} && rm -f ~/backupContainerToS3.sh"
+	# cron="${timer} root wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh ${serverName} ${containerType} ${s3AccessKey} ${s3SecretKey} ${s3ApiAddress} ${s3BucketName} ${s3StorageClass} && rm -f ~/backupContainerToS3.sh"
 	# sed -i -e $'$a\\\n'"${cron}" /etc/crontab
-	echo ${cron} >>/etc/crontab
+	echo "${timer} root wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh ${serverName} ${containerType} ${s3AccessKey} ${s3SecretKey} ${s3ApiAddress} ${s3BucketName} ${s3StorageClass} && rm -f ~/backupContainerToS3.sh" >>/etc/crontab
 	systemctl restart crond
 fi
