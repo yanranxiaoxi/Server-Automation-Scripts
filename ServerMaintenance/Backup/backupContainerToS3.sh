@@ -78,7 +78,7 @@ fi
 # 使用 MinIO Client 将数据上传到 S3 服务器
 cd /"${containerType}"directorybackup/ || exit
 ./mc alias set "${serverName}" "${s3ApiAddress}" "${s3AccessKey}" "${s3SecretKey}"
-./mc cp --recursive --storage-class="${s3StorageClass}" /"${containerType}"directorybackup/"${backupDay}"/ "${serverName}"/${s3BucketName}/"${serverName}"/"${backupDay}"/
+./mc cp --recursive --storage-class="${s3StorageClass}" /"${containerType}"directorybackup/"${backupDay}"/ "${serverName}"/"${s3BucketName}"/"${serverName}"/"${backupDay}"/
 
 # 清理文件
 find . -type d | sed -n '2,$p' | xargs rm -rf
