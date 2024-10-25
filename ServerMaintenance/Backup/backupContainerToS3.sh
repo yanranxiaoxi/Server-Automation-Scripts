@@ -24,22 +24,17 @@ s3BucketName=$6
 s3StorageClass=$7
 # 是否首次安装，是则填写 'firstRun'，将会自动注册到 crontab
 firstRun=$8
-# 定时任务执行时刻：小时
-timerH=$9
-# 定时任务执行时刻：分钟
-timerM=$10
+# 定时任务执行时刻
+timer=$9
 
 # 检查变量
 if [[ -z "${serverName}" || -z "${containerType}" || -z "${s3AccessKey}" || -z "${s3SecretKey}" || -z "${s3ApiAddress}" ]]; then
 	echo "错误：输入变量不正确"
 	exit
 fi
-if [[ ${firstRun} =~ "firstRun" ]]; then
-	if [[ -z "${timerH}" || -z "${timerM}" ]]; then
-		echo "错误：输入变量不正确"
-		exit
+if [[ -z "${timer}" ]]; then
+		timer="0 3 * * *"
 	fi
-fi
 if [[ -z "${s3BucketName}" ]]; then
 	s3BucketName="backup-container"
 fi
@@ -90,7 +85,7 @@ find . -type d | sed -n '2,$p' | xargs rm -rf
 
 # 创建系统定时任务
 if [[ ${firstRun} =~ "firstRun" ]]; then
-	cron="${timerM} ${timerH} * * * root wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh ${serverName} ${containerType} ${s3AccessKey} ${s3SecretKey} ${s3ApiAddress} ${s3BucketName} ${s3StorageClass} && rm -f ~/backupContainerToS3.sh"
+	cron="${timer} root wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh ${serverName} ${containerType} ${s3AccessKey} ${s3SecretKey} ${s3ApiAddress} ${s3BucketName} ${s3StorageClass} && rm -f ~/backupContainerToS3.sh"
 	# sed -i -e $'$a\\\n'"${cron}" /etc/crontab
 	echo ${cron} >>/etc/crontab
 	systemctl restart crond
