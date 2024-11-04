@@ -16,6 +16,7 @@ pages:
   script:
     - mkdir ./public/
     - cp -r ./Container/ ./PublicKey/ ./ServerMaintenance/ ./Temp/ ./public/
+  pages: true
   artifacts:
     paths:
       - ./public/
