@@ -50,7 +50,7 @@ if [[ -z "${timerTime}" ]]; then
 fi
 
 # 检查环境
-if [ ! -f "/${containerType}directorybackup/mc" ]; then
+if [ ! -f "/podmandirectorybackup/mc" ]; then
 	echo "错误：请先配置服务器容器备份"
 	exit
 fi

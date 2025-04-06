@@ -16,10 +16,16 @@ wget -O ~/autoSyncNiceCaddyfile.sh https://sh.soraharu.com/Container/caddy2/auto
 
 ### 备份 / Backup
 
-#### 将容器目录备份到 S3 / backupContainerToS3
+#### 将容器数据备份到 S3 / backupContainerToS3
 
 ```shell
 wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh "${serverName}" "${containerType}" "${s3AccessKey}" "${s3SecretKey}" "${s3ApiAddress}" "${s3BucketName}" "${s3StorageClass}" "firstRun" "${timerTime}" && rm -f ~/backupContainerToS3.sh
+```
+
+#### 将 MariaDB 11 数据库备份到 S3 / backupMariaDB11DatabaseToS3
+
+```shell
+wget -O ~/backupMariaDB11DatabaseToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB11DatabaseToS3.sh && sh ~/backupMariaDB11DatabaseToS3.sh "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "firstRun" "${timerTime}" && rm -f ~/backupMariaDB11DatabaseToS3.sh
 ```
 
 ### 操作系统初始化配置 / FirstInstallation
