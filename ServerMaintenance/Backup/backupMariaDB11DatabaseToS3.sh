@@ -80,6 +80,6 @@ rm -f /databasebackup/"${containerName}"/all_databases.sql
 
 # 创建系统定时任务
 if [[ ${firstRun} =~ "firstRun" ]]; then
-	echo "${timerTime} root wget -O ~/backupMariaDB11DatabaseToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB11DatabaseToS3.sh && sh ~/backupMariaDB11DatabaseToS3.sh ${serverName} ${containerName} ${databaseUser} ${databasePassword} ${s3BucketName} ${s3StorageClass} && rm -f ~/backupMariaDB11DatabaseToS3.sh" >>/etc/cron.d/backupMariaDB11DatabaseToS3.cron
+	echo "${timerTime} root wget -O ~/backupMariaDB11DatabaseToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB11DatabaseToS3.sh && sh ~/backupMariaDB11DatabaseToS3.sh ${serverName} ${containerName} ${databaseUser} ${databasePassword} ${s3BucketName} ${s3StorageClass} && rm -f ~/backupMariaDB11DatabaseToS3.sh" >/etc/cron.d/backupMariaDB11DatabaseToS3.cron
 	systemctl restart crond
 fi
