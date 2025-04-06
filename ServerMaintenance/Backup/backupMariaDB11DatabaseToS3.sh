@@ -60,10 +60,11 @@ backupDate=$(date "+%Y%m%d%H%M%S")
 backupDay=$(date "+%Y%m%d")
 
 # 建立备份
+mkdir -p /databasebackup/"${containerName}"/
 if [[ -z "${databasePassword}" ]]; then
-	podman exec -t "${containerName}" mariadb-dump --all-databases > /backup/all_databases.sql
+	podman exec -t "${containerName}" mariadb-dump --all-databases > /databasebackup/"${containerName}"/all_databases.sql
 else
-	podman exec -t "${containerName}" mariadb-dump -u"${databaseUser}" -p"${databasePassword}" --all-databases > /backup/all_databases.sql
+	podman exec -t "${containerName}" mariadb-dump -u"${databaseUser}" -p"${databasePassword}" --all-databases > /databasebackup/"${containerName}"/all_databases.sql
 fi
 
 # 使用 tar 压缩待备份文件
