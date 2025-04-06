@@ -68,8 +68,13 @@ else
 fi
 
 # 使用 tar 压缩待备份文件
+cd /databasebackup/"${containerName}"/ || exit
+if [ ! -f "all_databases.sql" ]; then
+	echo "错误：待备份数据库文件不存在"
+	exit
+fi
 mkdir -p /databasebackup/upload/
-tar zcvf /databasebackup/upload/backup_"${containerName}"_all_databases_"${backupDate}".tar.gz /databasebackup/"${containerName}"/all_databases.sql
+tar zcvf /databasebackup/upload/backup_"${containerName}"_all_databases_"${backupDate}".tar.gz all_databases.sql
 
 # 使用 MinIO Client 将数据上传到 S3 服务器
 # /podmandirectorybackup/mc alias set "${serverName}" "${s3ApiAddress}" "${s3AccessKey}" "${s3SecretKey}"
