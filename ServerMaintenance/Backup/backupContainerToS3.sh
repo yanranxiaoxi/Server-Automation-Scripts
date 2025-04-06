@@ -28,19 +28,21 @@ firstRun=$8
 timerTime=$9
 
 # 检查变量
-if [[ -z "${serverName}" || -z "${containerType}" || -z "${s3AccessKey}" || -z "${s3SecretKey}" || -z "${s3ApiAddress}" ]]; then
+if [[ -z "${serverName}" || -z "${s3AccessKey}" || -z "${s3SecretKey}" || -z "${s3ApiAddress}" ]]; then
 	echo "错误：输入变量不正确"
 	exit
 fi
-if [[ -z "${timerTime}" ]]; then
-	timerTime='0 3 * * *'
+if [[ -z "${containerType}" ]]; then
+	containerType="podman"
 fi
 if [[ -z "${s3BucketName}" ]]; then
 	s3BucketName="backup-container"
 fi
 if [[ -z "${s3StorageClass}" ]]; then
 	s3StorageClass="Standard"
-	# s3StorageClass="DeepColdArchive"
+fi
+if [[ -z "${timerTime}" ]]; then
+	timerTime='0 3 * * *'
 fi
 
 # 新建备份目录
