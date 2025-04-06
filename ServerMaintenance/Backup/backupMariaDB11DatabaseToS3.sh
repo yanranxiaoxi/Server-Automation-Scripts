@@ -71,9 +71,8 @@ mkdir -p /databasebackup/upload/
 tar zcvf /databasebackup/upload/backup_"${containerName}"_all_databases_"${backupDate}".tar.gz /databasebackup/"${containerName}"/all_databases.sql
 
 # 使用 MinIO Client 将数据上传到 S3 服务器
-cd /databasebackup/upload/ || exit
-# ./mc alias set "${serverName}" "${s3ApiAddress}" "${s3AccessKey}" "${s3SecretKey}"
-./mc cp --storage-class="${s3StorageClass}" /databasebackup/upload/backup_"${containerName}"_all_databases_"${backupDate}".tar.gz "${serverName}"/"${s3BucketName}"/"${serverName}"/"${backupDay}"/
+# /podmandirectorybackup/mc alias set "${serverName}" "${s3ApiAddress}" "${s3AccessKey}" "${s3SecretKey}"
+/podmandirectorybackup/mc cp --storage-class="${s3StorageClass}" /databasebackup/upload/backup_"${containerName}"_all_databases_"${backupDate}".tar.gz "${serverName}"/"${s3BucketName}"/"${serverName}"/"${backupDay}"/
 
 # 清理文件
 rm -f /databasebackup/upload/backup_"${containerName}"_all_databases_"${backupDate}".tar.gz
