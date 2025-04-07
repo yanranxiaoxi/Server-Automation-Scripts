@@ -2,7 +2,7 @@
 
 # Swap - newSwap
 #
-# 新建交换文件
+# 新建交换空间
 #
 # Author:	XiaoXi<admin@soraharu.com>
 # Website:	https://sh.soraharu.com/

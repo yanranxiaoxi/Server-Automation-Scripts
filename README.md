@@ -22,6 +22,12 @@ wget -O ~/autoSyncNiceCaddyfile.sh https://sh.soraharu.com/Container/caddy2/auto
 wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh "${serverName}" "${containerType}" "${s3AccessKey}" "${s3SecretKey}" "${s3ApiAddress}" "${s3BucketName}" "${s3StorageClass}" "firstRun" "${timerTime}" && rm -f ~/backupContainerToS3.sh
 ```
 
+#### 将 MariaDB 10 数据库备份到 S3 / backupMariaDB10DatabaseToS3
+
+```shell
+wget -O ~/backupMariaDB10DatabaseToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB10DatabaseToS3.sh && sh ~/backupMariaDB10DatabaseToS3.sh "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "firstRun" "${timerTime}" && rm -f ~/backupMariaDB10DatabaseToS3.sh
+```
+
 #### 将 MariaDB 11 数据库备份到 S3 / backupMariaDB11DatabaseToS3
 
 ```shell
@@ -80,4 +86,16 @@ wget -O ~/removeAutoUpdateContainer.sh https://sh.soraharu.com/ServerMaintenance
 
 ```shell
 wget -O ~/newSwap.sh https://sh.soraharu.com/ServerMaintenance/Swap/newSwap.sh && sh ~/newSwap.sh "${swapSize}" "/swapfile" && rm -f ~/newSwap.sh
+```
+
+#### 调整 Swap 大小 / resizeSwap
+
+```shell
+wget -O ~/resizeSwap.sh https://sh.soraharu.com/ServerMaintenance/Swap/resizeSwap.sh && sh ~/resizeSwap.sh "${swapSize}" "/swapfile" && rm -f ~/resizeSwap.sh
+```
+
+#### 移除 Swap / removeSwap
+
+```shell
+wget -O ~/removeSwap.sh https://sh.soraharu.com/ServerMaintenance/Swap/removeSwap.sh && sh ~/removeSwap.sh "/swapfile" && rm -f ~/removeSwap.sh
 ```
