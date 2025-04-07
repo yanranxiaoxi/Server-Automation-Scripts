@@ -139,6 +139,10 @@ sh -c "$(wget -O- https://install.ohmyz.sh)" "" --unattended
 sed -i "s/# zstyle ':omz:update' mode auto/zstyle ':omz:update' mode auto/g" /root/.zshrc
 zsh
 
+# 设置 vi
+echo "\nset ts=4" >>/etc/virc
+echo "set ai" >>/etc/virc
+
 # 使用 OSC 1337 协议向远程 shell 报告 CWD
 if [ "$(grep -c 'export PS1=' '/root/.bash_profile')" -eq '0' ]; then
 	printf "export PS1=\"\$PS1\\[\\\e]1337;CurrentDir=\"'\$(pwd)\\\a\\]'" >>/root/.bash_profile
