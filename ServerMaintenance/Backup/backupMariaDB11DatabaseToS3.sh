@@ -15,7 +15,7 @@
 serverName=$1
 # 容器名称
 containerName=$2
-# 数据库用户名（可以为空）
+# 数据库用户名
 databaseUser=$3
 # 数据库密码（可以为空）
 databasePassword=$4
@@ -34,10 +34,10 @@ if [[ -z "${serverName}" ]]; then
 	exit
 fi
 if [[ -z "${containerName}" ]]; then
-	containerName='mariadb11'
+	containerName="mariadb11"
 fi
 if [[ -z "${databaseUser}" ]]; then
-	databaseUser='root'
+	databaseUser="root"
 fi
 if [[ -z "${s3BucketName}" ]]; then
 	s3BucketName="backup-database"
@@ -62,7 +62,7 @@ backupDay=$(date "+%Y%m%d")
 # 建立备份
 mkdir -p /databasebackup/"${containerName}"/
 if [[ -z "${databasePassword}" ]]; then
-	podman exec -t "${containerName}" mariadb-dump --all-databases > /databasebackup/"${containerName}"/all_databases.sql
+	podman exec -t "${containerName}" mariadb-dump -u"${databaseUser}" --all-databases > /databasebackup/"${containerName}"/all_databases.sql
 else
 	podman exec -t "${containerName}" mariadb-dump -u"${databaseUser}" -p"${databasePassword}" --all-databases > /databasebackup/"${containerName}"/all_databases.sql
 fi
@@ -77,7 +77,6 @@ mkdir -p /databasebackup/upload/
 tar zcvf /databasebackup/upload/backup_"${containerName}"_all_databases_"${backupDate}".tar.gz all_databases.sql
 
 # 使用 MinIO Client 将数据上传到 S3 服务器
-# /podmandirectorybackup/mc alias set "${serverName}" "${s3ApiAddress}" "${s3AccessKey}" "${s3SecretKey}"
 /podmandirectorybackup/mc cp --storage-class="${s3StorageClass}" /databasebackup/upload/backup_"${containerName}"_all_databases_"${backupDate}".tar.gz "${serverName}"/"${s3BucketName}"/"${serverName}"/"${backupDay}"/
 
 # 清理文件
@@ -86,6 +85,6 @@ rm -f /databasebackup/"${containerName}"/all_databases.sql
 
 # 创建系统定时任务
 if [[ ${firstRun} =~ "firstRun" ]]; then
-	echo "${timerTime} root wget -O ~/backupMariaDB11DatabaseToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB11DatabaseToS3.sh && sh ~/backupMariaDB11DatabaseToS3.sh ${serverName} ${containerName} ${databaseUser} ${databasePassword} ${s3BucketName} ${s3StorageClass} && rm -f ~/backupMariaDB11DatabaseToS3.sh" >/etc/cron.d/backupMariaDB11DatabaseToS3.cron
+	echo "${timerTime} root wget -O ~/backupMariaDB11DatabaseToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB11DatabaseToS3.sh && sh ~/backupMariaDB11DatabaseToS3.sh ${serverName} ${containerName} ${databaseUser} ${databasePassword} ${s3BucketName} ${s3StorageClass} && rm -f ~/backupMariaDB11DatabaseToS3.sh" >/etc/cron.d/backupMariaDB11DatabaseToS3."${containerName}".cron
 	systemctl restart crond
 fi

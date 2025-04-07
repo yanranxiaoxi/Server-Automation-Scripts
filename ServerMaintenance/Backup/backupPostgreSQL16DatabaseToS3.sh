@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Backup - backupMariaDB10DatabaseToS3
+# Backup - backupPostgreSQL16DatabaseToS3
 #
-# 将 MariaDB 10 数据库备份到 S3 存储桶
+# 将 PostgreSQL 16 数据库备份到 S3 存储桶
 #
 # Author:	XiaoXi<admin@soraharu.com>
 # Website:	https://sh.soraharu.com/
@@ -10,6 +10,7 @@
 
 # 本脚本只支持 Podman 容器环境
 # 需要首先启用 backupContainerToS3.sh 脚本
+# PostgreSQL 本地登录豁免，密码输入暂不支持，欢迎提交 PR
 
 # 服务器名称（对应 S3 中的路径）
 serverName=$1
@@ -34,10 +35,10 @@ if [[ -z "${serverName}" ]]; then
 	exit
 fi
 if [[ -z "${containerName}" ]]; then
-	containerName="mariadb10"
+	containerName="postgres16"
 fi
 if [[ -z "${databaseUser}" ]]; then
-	databaseUser="root"
+	databaseUser="postgres"
 fi
 if [[ -z "${s3BucketName}" ]]; then
 	s3BucketName="backup-database"
@@ -46,7 +47,7 @@ if [[ -z "${s3StorageClass}" ]]; then
 	s3StorageClass="Standard"
 fi
 if [[ -z "${timerTime}" ]]; then
-	timerTime='5 4 * * *'
+	timerTime='35 4 * * *'
 fi
 
 # 检查环境
@@ -62,29 +63,29 @@ backupDay=$(date "+%Y%m%d")
 # 建立备份
 mkdir -p /databasebackup/"${containerName}"/
 if [[ -z "${databasePassword}" ]]; then
-	podman exec -t "${containerName}" mariadb-dump -u"${databaseUser}" --all-databases > /databasebackup/"${containerName}"/all_databases.sql
+	podman exec -t "${containerName}" pg_dumpall -U "${databaseUser}" > /databasebackup/"${containerName}"/all_databases.out
 else
-	podman exec -t "${containerName}" mariadb-dump -u"${databaseUser}" -p"${databasePassword}" --all-databases > /databasebackup/"${containerName}"/all_databases.sql
+	podman exec -t "${containerName}" pg_dumpall -U "${databaseUser}" > /databasebackup/"${containerName}"/all_databases.out
 fi
 
 # 使用 tar 压缩待备份文件
 cd /databasebackup/"${containerName}"/ || exit
-if [ ! -f "all_databases.sql" ]; then
+if [ ! -f "all_databases.out" ]; then
 	echo "错误：待备份数据库文件不存在"
 	exit
 fi
 mkdir -p /databasebackup/upload/
-tar zcvf /databasebackup/upload/backup_"${containerName}"_all_databases_"${backupDate}".tar.gz all_databases.sql
+tar zcvf /databasebackup/upload/backup_"${containerName}"_all_databases_"${backupDate}".tar.gz all_databases.out
 
 # 使用 MinIO Client 将数据上传到 S3 服务器
 /podmandirectorybackup/mc cp --storage-class="${s3StorageClass}" /databasebackup/upload/backup_"${containerName}"_all_databases_"${backupDate}".tar.gz "${serverName}"/"${s3BucketName}"/"${serverName}"/"${backupDay}"/
 
 # 清理文件
 rm -f /databasebackup/upload/backup_"${containerName}"_all_databases_"${backupDate}".tar.gz
-rm -f /databasebackup/"${containerName}"/all_databases.sql
+rm -f /databasebackup/"${containerName}"/all_databases.out
 
 # 创建系统定时任务
 if [[ ${firstRun} =~ "firstRun" ]]; then
-	echo "${timerTime} root wget -O ~/backupMariaDB10DatabaseToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB10DatabaseToS3.sh && sh ~/backupMariaDB10DatabaseToS3.sh ${serverName} ${containerName} ${databaseUser} ${databasePassword} ${s3BucketName} ${s3StorageClass} && rm -f ~/backupMariaDB10DatabaseToS3.sh" >/etc/cron.d/backupMariaDB10DatabaseToS3."${containerName}".cron
+	echo "${timerTime} root wget -O ~/backupPostgreSQL16DatabaseToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupPostgreSQL16DatabaseToS3.sh && sh ~/backupPostgreSQL16DatabaseToS3.sh ${serverName} ${containerName} ${databaseUser} ${databasePassword} ${s3BucketName} ${s3StorageClass} && rm -f ~/backupPostgreSQL16DatabaseToS3.sh" >/etc/cron.d/backupPostgreSQL16DatabaseToS3."${containerName}".cron
 	systemctl restart crond
 fi
