@@ -23,7 +23,7 @@ dnf makecache
 dnf update -y
 dnf install -y epel-release
 dnf config-manager --enable crb
-dnf install -y glibc-common langpacks-zh_CN dnf-plugins-core dnf-utils dnf-plugins-corednf-automatic kpatch kpatch-dnf passwd wget net-tools firewalld git cockpit cockpit-packagekit cockpit-storaged cockpit-podman zsh util-linux-user ntfs-3g ibus ibus-libpinyin gvim gnome-tweaks gnome-extensions-app thunderbird darktable libreoffice-calc libreoffice-impress libreoffice-writer libreoffice-draw remmina kleopatra vlc qemu-kvm libvirt virt-manager virt-install bridge-utils
+dnf install -y glibc-common langpacks-zh_CN dnf-plugins-core dnf-utils dnf-automatic kpatch kpatch-dnf passwd wget net-tools firewalld git cockpit cockpit-packagekit cockpit-storaged cockpit-podman zsh util-linux-user ntfs-3g ibus ibus-libpinyin gvim gnome-tweaks gnome-extensions-app thunderbird darktable libreoffice-calc libreoffice-impress libreoffice-writer libreoffice-draw remmina kleopatra vlc qemu-kvm libvirt virt-manager virt-install bridge-utils
 
 # 设置系统语言为简体中文
 localectl set-locale "zh_CN.utf8"
@@ -135,6 +135,7 @@ systemctl enable --now libvirtd
 
 # 加载 KVM 需要的 IOMMU 内核模块
 sed -i.bak 's/GRUB_CMDLINE_LINUX="\(.*\)"/GRUB_CMDLINE_LINUX="\1 intel_iommu=on"/' /etc/default/grub
+# sed -i.bak 's/GRUB_CMDLINE_LINUX="\(.*\)"/GRUB_CMDLINE_LINUX="\1 amd_iommu=on"/' /etc/default/grub
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
 # 支持 LEGACY GPG 公钥
