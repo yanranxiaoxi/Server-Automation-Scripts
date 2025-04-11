@@ -192,3 +192,4 @@ dnf remove yelp gnome-user-docs firefox evolution -y
 # 在 gnome-tweaks 内进行主题配置
 # 在 设置 -> Keyboard -> 键盘快捷键 -> 截图 -> 复制选区截图到剪贴板 处配置为 Ctrl+Alt+A
 # 在 代理账户（xiaoxi）配置 oh-my-zsh
+# 在 Kleopatra 配置证书
