@@ -25,13 +25,31 @@ wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backu
 #### 将 MariaDB 10 数据库备份到 S3 / backupMariaDB10DatabaseToS3
 
 ```shell
-wget -O ~/backupMariaDB10DatabaseToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB10DatabaseToS3.sh && sh ~/backupMariaDB10DatabaseToS3.sh "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "firstRun" "${timerTime}" && rm -f ~/backupMariaDB10DatabaseToS3.sh
+wget -O ~/backupMariaDB10DatabaseToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB10DatabaseToS3.sh && sh ~/backupMariaDB10DatabaseToS3.sh "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}" && rm -f ~/backupMariaDB10DatabaseToS3.sh
 ```
 
 #### 将 MariaDB 11 数据库备份到 S3 / backupMariaDB11DatabaseToS3
 
 ```shell
-wget -O ~/backupMariaDB11DatabaseToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB11DatabaseToS3.sh && sh ~/backupMariaDB11DatabaseToS3.sh "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "firstRun" "${timerTime}" && rm -f ~/backupMariaDB11DatabaseToS3.sh
+wget -O ~/backupMariaDB11DatabaseToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB11DatabaseToS3.sh && sh ~/backupMariaDB11DatabaseToS3.sh "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}" && rm -f ~/backupMariaDB11DatabaseToS3.sh
+```
+
+#### 将 PostgreSQL 14 数据库备份到 S3 / backupPostgreSQL14DatabaseToS3
+
+```shell
+wget -O ~/backupPostgreSQL14DatabaseToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupPostgreSQL14DatabaseToS3.sh && sh ~/backupPostgreSQL14DatabaseToS3.sh "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}" && rm -f ~/backupPostgreSQL14DatabaseToS3.sh
+```
+
+#### 将 PostgreSQL 16 数据库备份到 S3 / backupPostgreSQL16DatabaseToS3
+
+```shell
+wget -O ~/backupPostgreSQL16DatabaseToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupPostgreSQL16DatabaseToS3.sh && sh ~/backupPostgreSQL16DatabaseToS3.sh "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}" && rm -f ~/backupPostgreSQL16DatabaseToS3.sh
+```
+
+#### 将 PostgreSQL 17 数据库备份到 S3 / backupPostgreSQL17DatabaseToS3
+
+```shell
+wget -O ~/backupPostgreSQL17DatabaseToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupPostgreSQL17DatabaseToS3.sh && sh ~/backupPostgreSQL17DatabaseToS3.sh "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}" && rm -f ~/backupPostgreSQL17DatabaseToS3.sh
 ```
 
 ### 操作系统初始化配置 / FirstInstallation
