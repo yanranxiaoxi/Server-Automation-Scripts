@@ -23,10 +23,8 @@ databasePassword=$4
 s3BucketName=$5
 # S3 存储类
 s3StorageClass=$6
-# 是否首次安装，是则填写 'firstRun'，将会自动注册到 crontab
-firstRun=$7
 # 定时任务执行时刻
-timerTime=$8
+timerTime=$7
 
 # 检查变量
 if [[ -z "${serverName}" ]]; then
@@ -84,7 +82,5 @@ rm -f /databasebackup/upload/backup_"${containerName}"_all_databases_"${backupDa
 rm -f /databasebackup/"${containerName}"/all_databases.sql
 
 # 创建系统定时任务
-if [[ ${firstRun} =~ "firstRun" ]]; then
-	echo "${timerTime} root wget -O ~/backupMariaDB10DatabaseToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB10DatabaseToS3.sh && sh ~/backupMariaDB10DatabaseToS3.sh ${serverName} ${containerName} ${databaseUser} ${databasePassword} ${s3BucketName} ${s3StorageClass} && rm -f ~/backupMariaDB10DatabaseToS3.sh" >/etc/cron.d/backupMariaDB10DatabaseToS3."${containerName}".cron
-	systemctl restart crond
-fi
+echo "${timerTime} root wget -O ~/backupMariaDB10DatabaseToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB10DatabaseToS3.sh && sh ~/backupMariaDB10DatabaseToS3.sh \"${serverName}\" \"${containerName}\" \"${databaseUser}\" \"${databasePassword}\" \"${s3BucketName}\" \"${s3StorageClass}\" \"${timerTime}\" && rm -f ~/backupMariaDB10DatabaseToS3.sh" >/etc/cron.d/backupMariaDB10DatabaseToS3."${containerName}".cron
+systemctl restart crond
