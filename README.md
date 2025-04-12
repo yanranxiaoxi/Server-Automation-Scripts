@@ -9,7 +9,47 @@
 #### 自动同步 Nice Caddyfile 中的复用块 / autoSyncNiceCaddyfile
 
 ```shell
-wget -O ~/autoSyncNiceCaddyfile.sh https://sh.soraharu.com/Container/caddy2/autoSyncNiceCaddyfile.sh && sh ~/autoSyncNiceCaddyfile.sh "${containerType}" "firstRun" && rm -f ~/autoSyncNiceCaddyfile.sh
+wget -O ~/autoSyncNiceCaddyfile.sh https://sh.soraharu.com/Container/caddy2/autoSyncNiceCaddyfile.sh && sh ~/autoSyncNiceCaddyfile.sh "${containerType}" && rm -f ~/autoSyncNiceCaddyfile.sh
+```
+
+### gitlab
+
+#### 定时任务
+
+```shell
+wget -O ~/gitlab.cron.sh https://sh.soraharu.com/Container/gitlab/cron.sh && sh ~/gitlab.cron.sh && rm -f ~/gitlab.cron.sh
+```
+
+### gitlab-pages
+
+#### 定时任务
+
+```shell
+wget -O ~/gitlab-pages.cron.sh https://sh.soraharu.com/Container/gitlab-pages/cron.sh && sh ~/gitlab-pages.cron.sh && rm -f ~/gitlab-pages.cron.sh
+```
+
+### gitlab-runner
+
+#### 定时任务
+
+```shell
+wget -O ~/gitlab-runner.cron.sh https://sh.soraharu.com/Container/gitlab-runner/cron.sh && sh ~/gitlab-runner.cron.sh && rm -f ~/gitlab-runner.cron.sh
+```
+
+### mastodon
+
+#### 定时任务
+
+```shell
+wget -O ~/mastodon.cron.sh https://sh.soraharu.com/Container/mastodon/cron.sh && sh ~/mastodon.cron.sh && rm -f ~/mastodon.cron.sh
+```
+
+### typecho
+
+#### 定时任务
+
+```shell
+wget -O ~/typecho.cron.sh https://sh.soraharu.com/Container/typecho/cron.sh && sh ~/typecho.cron.sh && rm -f ~/typecho.cron.sh
 ```
 
 ## 服务器维护 / ServerMaintenance
