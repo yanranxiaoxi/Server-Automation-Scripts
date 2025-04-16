@@ -184,6 +184,7 @@ flatpak install flathub org.gimp.GIMP -y
 flatpak install flathub org.inkscape.Inkscape -y
 flatpak install flathub com.valvesoftware.Steam -y
 flatpak install flathub rest.insomnia.Insomnia -y
+flatpak install flathub net.agalwood.Motrix -y
 
 # 移除应用
 dnf remove yelp gnome-user-docs firefox evolution -y
