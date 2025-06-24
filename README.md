@@ -36,6 +36,14 @@ wget -O ~/gitlab-pages.cron.sh https://sh.soraharu.com/Container/gitlab-pages/cr
 wget -O ~/gitlab-runner.cron.sh https://sh.soraharu.com/Container/gitlab-runner/cron.sh && sh ~/gitlab-runner.cron.sh && rm -f ~/gitlab-runner.cron.sh
 ```
 
+### image-transfer-station
+
+#### 定时任务 / cron
+
+```shell
+wget -O ~/image-transfer-station.cron.sh https://sh.soraharu.com/Container/image-transfer-station/cron.sh && sh ~/image-transfer-station.cron.sh && rm -f ~/image-transfer-station.cron.sh
+```
+
 ### mastodon
 
 #### 定时任务 / cron
