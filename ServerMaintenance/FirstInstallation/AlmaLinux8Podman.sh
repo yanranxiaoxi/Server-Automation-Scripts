@@ -59,7 +59,8 @@ hostnamectl set-hostname --pretty "${prettyHostname}"
 hostnamectl set-hostname --static "${staticHostname}"
 
 # 设置 DNS
-echo "nameserver 8.8.8.8" >/etc/resolv.conf # 临时 DNS 解析服务器
+echo "nameserver 8.8.8.8" >/etc/resolv.conf # 临时 IPv4 DNS 解析服务器
+echo "nameserver 2001:4860:4860::8888" >>/etc/resolv.conf # 临时 IPv6 DNS 解析服务器
 wget -O ~/setGoogle.sh https://sh.soraharu.com/ServerMaintenance/DNS/setGoogle.sh
 sh ~/setGoogle.sh
 rm -f ~/setGoogle.sh

@@ -1,6 +1,6 @@
 # Server Automation Scripts
 
-小汐个人服务器自动化维护脚本，适用于 AlmaLinux 8 & AlmaLinux 9 及其兼容服务器，所有脚本均需以 root 权限运行
+小汐个人服务器自动化维护脚本，适用于 AlmaLinux 8 & AlmaLinux 9 & AlmaLinux 10 及其兼容服务器，所有脚本均需以 root 权限运行
 
 ## 容器定制化 / Container
 
@@ -110,6 +110,18 @@ wget -O ~/AlmaLinux8Podman.sh https://sh.soraharu.com/ServerMaintenance/FirstIns
 
 ```shell
 wget -O ~/AlmaLinux9Podman.sh https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux9Podman.sh && sh ~/AlmaLinux9Podman.sh "${sshPublicKey}" "${prettyHostname}" "${staticHostname}" && rm -f ~/AlmaLinux9Podman.sh
+```
+
+脚本执行完成后续执行：
+
+1. 使用 `passwd` 修改 root 用户密码
+2. 编辑 `/etc/motd` 以定义欢迎语
+3. 在 Cockpit 内开启内核补丁
+
+#### AlmaLinux 10 + Podman / AlmaLinux10Podman
+
+```shell
+wget -O ~/AlmaLinux10Podman.sh https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux10Podman.sh && sh ~/AlmaLinux10Podman.sh "${sshPublicKey}" "${prettyHostname}" "${staticHostname}" && rm -f ~/AlmaLinux10Podman.sh
 ```
 
 脚本执行完成后续执行：

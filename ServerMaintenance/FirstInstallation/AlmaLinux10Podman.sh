@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# FirstInstallation - AlmaLinux9Podman
+# FirstInstallation - AlmaLinux10Podman
 #
-# 操作系统初始化配置：AlmaLinux 9 + Podman
+# 操作系统初始化配置：AlmaLinux 10 + Podman
 #
 # Author:	XiaoXi<admin@soraharu.com>
 # Website:	https://sh.soraharu.com/
 # License:	MIT License
 
 # 检测操作系统版本
-if [ ! "$(grep -c ' release 9.' '/etc/redhat-release')" -eq '1' ]; then
-	echo "错误：操作系统版本非 RHEL 9 like"
+if [ ! "$(grep -c ' release 10.' '/etc/redhat-release')" -eq '1' ]; then
+	echo "错误：操作系统版本非 RHEL 10 like"
 	exit
 fi
 
