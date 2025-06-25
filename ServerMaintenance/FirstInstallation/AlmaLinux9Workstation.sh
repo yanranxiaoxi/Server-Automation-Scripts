@@ -183,14 +183,17 @@ flatpak install flathub io.typora.Typora -y
 flatpak install flathub org.gimp.GIMP -y
 flatpak install flathub org.inkscape.Inkscape -y
 flatpak install flathub com.valvesoftware.Steam -y
-flatpak install flathub rest.insomnia.Insomnia -y
 flatpak install flathub net.agalwood.Motrix -y
 
 # 移除应用
 dnf remove yelp gnome-user-docs firefox evolution -y
 
 # 在 设置 -> Keyboard -> 添加输入源 -> 汉语 (中国) -> 中文 (智能拼音)
-# 在 gnome-tweaks 内进行主题配置
+# 在 gnome-tweaks 内进行主题配置 -> 应用程序 -> Adwaita-dark
 # 在 设置 -> Keyboard -> 键盘快捷键 -> 截图 -> 复制选区截图到剪贴板 处配置为 Ctrl+Alt+A
+# 在 设置 -> 鼠标和触摸板 -> 触摸板 -> 轻拍以点击 -> 开
 # 在 代理账户（xiaoxi）配置 oh-my-zsh
 # 在 Kleopatra 配置证书
+# 在 gnome-tweaks 内配置开机启动程序 -> Thunderbird
+# 在 gnome-tweaks 内配置窗口标题栏 -> 标题栏按钮 -> 最大化/最小化 -> 开
+# 在 gnome-tweaks 内配置顶栏 -> 电池百分比/工作日/日期/秒/周数 -> 开
