@@ -126,6 +126,9 @@ cp /usr/share/containers/containers.conf /etc/containers/containers.conf
 sed -i 's/#log_size_max = -1/log_size_max = 10485760/g' /etc/containers/containers.conf
 systemctl restart podman.socket
 
+# 启用服务以解决 Podman 运行时丢失网络连接的问题 https://tech.soraharu.com/archives/160/
+systemctl enable netavark-firewalld-reload.service
+
 # Podman 新建 IPv6 网关
 podman network create --ipv6 --gateway fd00::1:8:1 --subnet fd00::1:8:0/112 --gateway 10.90.0.1 --subnet 10.90.0.0/16 podman1
 
