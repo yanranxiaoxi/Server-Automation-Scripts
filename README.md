@@ -138,6 +138,16 @@ wget -O ~/AlmaLinux10Podman.sh https://sh.soraharu.com/ServerMaintenance/FirstIn
 2. 编辑 `/etc/motd` 以定义欢迎语
 3. 在 Cockpit 内开启内核补丁
 
+#### AlmaLinux 10 + Podman Public Image / AlmaLinux10PodmanPublicImage
+
+```shell
+wget -O ~/AlmaLinux10PodmanPublicImage.sh https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux10PodmanPublicImage.sh && sh ~/AlmaLinux10PodmanPublicImage.sh "${prettyHostname}" "${staticHostname}" && rm -f ~/AlmaLinux10PodmanPublicImage.sh
+```
+
+脚本执行完成后续执行：
+
+1. 使用 `history -c` 清除历史记录
+
 ### Podman 容器管理 / Podman
 
 #### 禁用自动升级定时器 / disableAutoUpdateTimer
