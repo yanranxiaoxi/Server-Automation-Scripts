@@ -141,7 +141,7 @@ wget -O ~/AlmaLinux10Podman.sh https://sh.soraharu.com/ServerMaintenance/FirstIn
 #### AlmaLinux 10 + Podman Public Image / AlmaLinux10PodmanPublicImage
 
 ```shell
-wget -O ~/AlmaLinux10PodmanPublicImage.sh https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux10PodmanPublicImage.sh && sh ~/AlmaLinux10PodmanPublicImage.sh "${prettyHostname}" "${staticHostname}" && rm -f ~/AlmaLinux10PodmanPublicImage.sh
+wget -O ~/AlmaLinux10PodmanPublicImage.sh https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux10PodmanPublicImage.sh && sh ~/AlmaLinux10PodmanPublicImage.sh && rm -f ~/AlmaLinux10PodmanPublicImage.sh
 ```
 
 脚本执行完成后续执行：

@@ -14,17 +14,6 @@ if [ ! "$(grep -c ' release 10.' '/etc/redhat-release')" -eq '1' ]; then
 	exit
 fi
 
-# Pretty Hostname
-prettyHostname=$1
-# Static Hostname
-staticHostname=$2
-
-# 检查变量
-if [[ -z "${prettyHostname}" || -z "${staticHostname}" ]]; then
-	echo "错误：输入变量不正确"
-	exit
-fi
-
 # 安装依赖程序
 dnf clean all
 dnf makecache
@@ -53,8 +42,8 @@ dnf kpatch auto
 rmmod virtio_balloon
 
 # 设置主机名
-hostnamectl set-hostname --pretty "${prettyHostname}"
-hostnamectl set-hostname --static "${staticHostname}"
+hostnamectl set-hostname --pretty "XiaoXi's AlmaLinux"
+hostnamectl set-hostname --static "xiaoxis-almalinux"
 
 # 设置 DNS
 echo "nameserver 8.8.8.8" >/etc/resolv.conf # 临时 IPv4 DNS 解析服务器
@@ -138,6 +127,9 @@ if [ "$(grep -c 'precmd () { echo -n "\\x1b]1337;CurrentDir=$(pwd)\\x07" }' '/ro
 	echo "# 使用 OSC 1337 协议向远程 shell 报告 CWD" >>/root/.zshrc
 	echo "precmd () { echo -n \"\\\x1b]1337;CurrentDir=\$(pwd)\\\x07\" }" >>/root/.zshrc
 fi
+
+# 写入 MOTD
+echo "Welcome to XiaoXi's AlmaLinux!" >/etc/motd
 
 # 清除缓存
 dnf clean all
