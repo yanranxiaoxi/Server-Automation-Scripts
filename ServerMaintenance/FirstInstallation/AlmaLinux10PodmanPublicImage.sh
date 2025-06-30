@@ -133,5 +133,6 @@ echo "Welcome to XiaoXi's AlmaLinux!" >/etc/motd
 
 # 清除缓存
 dnf clean all
+rm -f /root/AlmaLinux10PodmanPublicImage.sh
 
 echo "操作已完成，请执行 history -c 清除历史记录"
