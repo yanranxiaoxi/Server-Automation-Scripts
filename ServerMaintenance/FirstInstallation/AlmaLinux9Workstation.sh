@@ -15,7 +15,7 @@ if [ ! "$(grep -c ' release 9.' '/etc/redhat-release')" -eq '1' ]; then
 fi
 
 # 确保是 root 用户
-sudo -i
+# sudo -i
 
 # 安装依赖程序
 dnf clean all
@@ -185,8 +185,8 @@ flatpak install flathub com.tencent.WeChat -y
 flatpak install flathub io.typora.Typora -y
 flatpak install flathub org.gimp.GIMP -y
 flatpak install flathub org.inkscape.Inkscape -y
-flatpak install flathub com.valvesoftware.Steam -y
 flatpak install flathub net.agalwood.Motrix -y
+flatpak install flathub org.videolan.VLC -y
 
 # 移除应用
 dnf remove yelp gnome-user-docs firefox evolution -y
