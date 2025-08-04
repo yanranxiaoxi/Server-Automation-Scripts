@@ -2,64 +2,6 @@
 
 小汐个人服务器自动化维护脚本，适用于 AlmaLinux 8 & AlmaLinux 9 & AlmaLinux 10 及其兼容服务器，所有脚本均需以 root 权限运行
 
-## 容器定制化 / Container
-
-### caddy2
-
-#### 自动同步 Nice Caddyfile 中的复用块 / autoSyncNiceCaddyfile
-
-```shell
-wget -O ~/autoSyncNiceCaddyfile.sh https://sh.soraharu.com/Container/caddy2/autoSyncNiceCaddyfile.sh && sh ~/autoSyncNiceCaddyfile.sh "${containerType}" && rm -f ~/autoSyncNiceCaddyfile.sh
-```
-
-### gitlab
-
-#### 定时任务 / cron
-
-```shell
-wget -O ~/gitlab.cron.sh https://sh.soraharu.com/Container/gitlab/cron.sh && sh ~/gitlab.cron.sh && rm -f ~/gitlab.cron.sh
-```
-
-### gitlab-pages
-
-#### 定时任务 / cron
-
-```shell
-wget -O ~/gitlab-pages.cron.sh https://sh.soraharu.com/Container/gitlab-pages/cron.sh && sh ~/gitlab-pages.cron.sh && rm -f ~/gitlab-pages.cron.sh
-```
-
-### gitlab-runner
-
-#### 定时任务 / cron
-
-```shell
-wget -O ~/gitlab-runner.cron.sh https://sh.soraharu.com/Container/gitlab-runner/cron.sh && sh ~/gitlab-runner.cron.sh && rm -f ~/gitlab-runner.cron.sh
-```
-
-### image-transfer-station
-
-#### 定时任务 / cron
-
-```shell
-wget -O ~/image-transfer-station.cron.sh https://sh.soraharu.com/Container/image-transfer-station/cron.sh && sh ~/image-transfer-station.cron.sh && rm -f ~/image-transfer-station.cron.sh
-```
-
-### mastodon
-
-#### 定时任务 / cron
-
-```shell
-wget -O ~/mastodon.cron.sh https://sh.soraharu.com/Container/mastodon/cron.sh && sh ~/mastodon.cron.sh && rm -f ~/mastodon.cron.sh
-```
-
-### typecho
-
-#### 定时任务 / cron
-
-```shell
-wget -O ~/typecho.cron.sh https://sh.soraharu.com/Container/typecho/cron.sh && sh ~/typecho.cron.sh && rm -f ~/typecho.cron.sh
-```
-
 ## 服务器维护 / ServerMaintenance
 
 ### 备份 / Backup
@@ -148,6 +90,14 @@ wget -O ~/AlmaLinux10PodmanPublicImage.sh https://sh.soraharu.com/ServerMaintena
 
 1. 使用 `history -c` 清除历史记录
 
+### 额外模块 / Model
+
+#### 安装 Tailscale / installTailscale
+
+```shell
+wget -O ~/installTailscale.sh https://sh.soraharu.com/ServerMaintenance/Model/installTailscale.sh && sh ~/installTailscale.sh && rm -f ~/installTailscale.sh
+```
+
 ### Podman 容器管理 / Podman
 
 #### 禁用自动升级定时器 / disableAutoUpdateTimer
@@ -186,4 +136,62 @@ wget -O ~/resizeSwap.sh https://sh.soraharu.com/ServerMaintenance/Swap/resizeSwa
 
 ```shell
 wget -O ~/removeSwap.sh https://sh.soraharu.com/ServerMaintenance/Swap/removeSwap.sh && sh ~/removeSwap.sh "/swapfile" && rm -f ~/removeSwap.sh
+```
+
+## 容器定制化 / Container
+
+### caddy2
+
+#### 自动同步 Nice Caddyfile 中的复用块 / autoSyncNiceCaddyfile
+
+```shell
+wget -O ~/autoSyncNiceCaddyfile.sh https://sh.soraharu.com/Container/caddy2/autoSyncNiceCaddyfile.sh && sh ~/autoSyncNiceCaddyfile.sh "${containerType}" && rm -f ~/autoSyncNiceCaddyfile.sh
+```
+
+### gitlab
+
+#### 定时任务 / cron
+
+```shell
+wget -O ~/gitlab.cron.sh https://sh.soraharu.com/Container/gitlab/cron.sh && sh ~/gitlab.cron.sh && rm -f ~/gitlab.cron.sh
+```
+
+### gitlab-pages
+
+#### 定时任务 / cron
+
+```shell
+wget -O ~/gitlab-pages.cron.sh https://sh.soraharu.com/Container/gitlab-pages/cron.sh && sh ~/gitlab-pages.cron.sh && rm -f ~/gitlab-pages.cron.sh
+```
+
+### gitlab-runner
+
+#### 定时任务 / cron
+
+```shell
+wget -O ~/gitlab-runner.cron.sh https://sh.soraharu.com/Container/gitlab-runner/cron.sh && sh ~/gitlab-runner.cron.sh && rm -f ~/gitlab-runner.cron.sh
+```
+
+### image-transfer-station
+
+#### 定时任务 / cron
+
+```shell
+wget -O ~/image-transfer-station.cron.sh https://sh.soraharu.com/Container/image-transfer-station/cron.sh && sh ~/image-transfer-station.cron.sh && rm -f ~/image-transfer-station.cron.sh
+```
+
+### mastodon
+
+#### 定时任务 / cron
+
+```shell
+wget -O ~/mastodon.cron.sh https://sh.soraharu.com/Container/mastodon/cron.sh && sh ~/mastodon.cron.sh && rm -f ~/mastodon.cron.sh
+```
+
+### typecho
+
+#### 定时任务 / cron
+
+```shell
+wget -O ~/typecho.cron.sh https://sh.soraharu.com/Container/typecho/cron.sh && sh ~/typecho.cron.sh && rm -f ~/typecho.cron.sh
 ```
