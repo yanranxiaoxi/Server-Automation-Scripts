@@ -14,9 +14,18 @@ rpm --import https://pkgs.tailscale.com/stable/rhel/9/repo.gpg
 dnf install tailscale -y
 systemctl enable --now tailscaled.service
 
+# 启用端口转发
+echo 'net.ipv4.ip_forward = 1' | tee -a /etc/sysctl.d/99-tailscale.conf
+echo 'net.ipv6.conf.all.forwarding = 1' | tee -a /etc/sysctl.d/99-tailscale.conf
+sysctl -p /etc/sysctl.d/99-tailscale.conf
+
 # 配置防火墙，启用 EasyNAT
+firewall-cmd --permanent --add-masquerade
 firewall-cmd --permanent --zone=public --new-service=tailscale
 firewall-cmd --permanent --service=tailscale --add-port=41641/udp
 firewall-cmd --reload
+
+# 启用出口节点
+tailscale set --advertise-exit-node
 
 echo "请在外部防火墙放行 41641/udp 并使用 tailscale up 命令继续 Tailscale 配置"
