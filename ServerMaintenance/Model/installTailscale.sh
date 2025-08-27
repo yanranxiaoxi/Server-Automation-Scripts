@@ -28,7 +28,7 @@ firewall-cmd --reload
 # 启用出口节点
 tailscale set --advertise-exit-node
 
-# 启用访问路由子网
-tailscale set --accept-routes
+# 可选的：启用访问路由子网
+# tailscale set --accept-routes
 
 echo "请在外部防火墙放行 41641/udp 并使用 tailscale up 命令继续 Tailscale 配置"
