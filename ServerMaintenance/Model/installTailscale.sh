@@ -14,6 +14,9 @@ rpm --import https://pkgs.tailscale.com/stable/rhel/9/repo.gpg
 dnf install tailscale -y
 systemctl enable --now tailscaled.service
 
+# 允许 resolv.conf 的修改
+chattr -i /etc/resolv.conf
+
 # 启用端口转发
 echo 'net.ipv4.ip_forward = 1' | tee -a /etc/sysctl.d/99-tailscale.conf
 echo 'net.ipv6.conf.all.forwarding = 1' | tee -a /etc/sysctl.d/99-tailscale.conf
