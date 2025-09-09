@@ -168,13 +168,6 @@ dnf config-manager --disable eugeny_tabby-source
 rpm --import https://packagecloud.io/eugeny/tabby/gpgkey
 dnf install tabby-terminal -y
 
-# 安装 V2rayA
-dnf config-manager --add-repo https://copr.fedorainfracloud.org/coprs/zhullyb/v2rayA/repo/centos-stream-9/zhullyb-v2rayA-centos-stream-9.repo
-mv /etc/yum.repos.d/zhullyb-v2rayA-centos-stream-9.repo /etc/yum.repos.d/v2raya.repo
-rpm --import https://download.copr.fedorainfracloud.org/results/zhullyb/v2rayA/pubkey.gpg
-dnf install v2raya -y
-systemctl enable --now v2raya.service
-
 # 启用 Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
@@ -187,6 +180,8 @@ flatpak install flathub org.gimp.GIMP -y
 flatpak install flathub org.inkscape.Inkscape -y
 flatpak install flathub net.agalwood.Motrix -y
 flatpak install flathub org.videolan.VLC -y
+flatpak install flathub it.mijorus.gearlever -y
+flatpak install flathub dev.deedles.Trayscale -y
 
 # 移除应用
 dnf remove yelp gnome-user-docs firefox evolution -y
