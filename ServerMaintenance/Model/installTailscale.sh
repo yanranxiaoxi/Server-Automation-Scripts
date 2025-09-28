@@ -82,14 +82,6 @@ sysctl -p /etc/sysctl.d/99-tailscale.conf
 firewall-cmd --permanent --add-masquerade
 firewall-cmd --permanent --zone=public --new-service=tailscale
 firewall-cmd --permanent --service=tailscale --add-port=41641/udp
-
-# 配置防火墙，仅允许 Tailscale 网段访问 SSH 和 Cockpit
-firewall-cmd --permanent --new-zone=tailscale
-firewall-cmd --permanent --zone=tailscale --set-description="Tailscale trusted network"
-firewall-cmd --permanent --zone=tailscale --set-target=ACCEPT
-firewall-cmd --permanent --zone=tailscale --add-interface=tailscale0
-firewall-cmd --permanent --zone=public --remove-service=ssh
-firewall-cmd --permanent --zone=public --remove-service=cockpit
 firewall-cmd --reload
 
 # Run!
@@ -100,4 +92,13 @@ tailscale up \
 	--accept-dns="${acceptDNS}" \
 	--accept-routes="${acceptRoutes}"
 
-echo "请注意在外部防火墙放行 41641/udp 端口"
+# 配置防火墙，仅允许 Tailscale 网段访问 SSH 和 Cockpit
+firewall-cmd --permanent --new-zone=tailscale
+firewall-cmd --permanent --zone=tailscale --set-description="Tailscale trusted network"
+firewall-cmd --permanent --zone=tailscale --set-target=ACCEPT
+firewall-cmd --permanent --zone=tailscale --add-interface=tailscale0
+# firewall-cmd --permanent --zone=public --remove-service=ssh
+firewall-cmd --permanent --zone=public --remove-service=cockpit
+firewall-cmd --reload
+
+echo "请注意在外部防火墙放行 41641/udp 端口，并在测试完成后移除 SSH 的公网访问权限"
