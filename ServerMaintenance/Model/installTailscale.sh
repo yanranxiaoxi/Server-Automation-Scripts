@@ -82,8 +82,17 @@ sysctl -p /etc/sysctl.d/99-tailscale.conf
 firewall-cmd --permanent --add-masquerade
 firewall-cmd --permanent --zone=public --new-service=tailscale
 firewall-cmd --permanent --service=tailscale --add-port=41641/udp
+
+# 配置防火墙，仅允许 Tailscale 网段访问 SSH 和 Cockpit
+firewall-cmd --permanent --new-zone=tailscale
+firewall-cmd --permanent --zone=tailscale --set-description="Tailscale trusted network"
+firewall-cmd --permanent --zone=tailscale --set-target=ACCEPT
+firewall-cmd --permanent --zone=tailscale --add-interface=tailscale0
+firewall-cmd --permanent --zone=public --remove-service=ssh
+firewall-cmd --permanent --zone=public --remove-service=cockpit
 firewall-cmd --reload
 
+# Run!
 tailscale up \
 	--login-server="${loginServer}" \
 	--authkey="${authKey}" \
