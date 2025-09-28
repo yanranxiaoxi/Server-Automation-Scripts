@@ -95,7 +95,7 @@ wget -O ~/AlmaLinux10PodmanPublicImage.sh https://sh.soraharu.com/ServerMaintena
 #### 安装 Tailscale / installTailscale
 
 ```shell
-wget -O ~/installTailscale.sh https://sh.soraharu.com/ServerMaintenance/Model/installTailscale.sh && sh ~/installTailscale.sh && rm -f ~/installTailscale.sh
+wget -O ~/installTailscale.sh https://sh.soraharu.com/ServerMaintenance/Model/installTailscale.sh && sh ~/installTailscale.sh "${authKey}" "${loginServer}" "${isJumpServer}" && rm -f ~/installTailscale.sh
 ```
 
 ### Podman 容器管理 / Podman
