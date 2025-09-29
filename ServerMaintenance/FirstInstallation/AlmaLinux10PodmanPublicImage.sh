@@ -36,6 +36,7 @@ echo "OnCalendar=mon 01:30" >>/etc/systemd/system/dnf-automatic-install.timer.d/
 systemctl daemon-reload
 
 # 启用内核实时补丁
+systemctl enable --now kpatch.service
 dnf kpatch auto
 
 # 移除 Virtio-Balloon 驱动
