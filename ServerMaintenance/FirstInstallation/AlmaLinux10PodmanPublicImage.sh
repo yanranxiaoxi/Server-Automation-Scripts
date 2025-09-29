@@ -115,7 +115,6 @@ sh -c "$(wget -O- https://install.ohmyz.sh)" "" --unattended
 
 # 开启 Oh My Zsh 自动更新
 sed -i "s/# zstyle ':omz:update' mode auto/zstyle ':omz:update' mode auto/g" /root/.zshrc
-zsh
 
 # 设置 vi
 echo "\nset ts=4" >>/etc/virc

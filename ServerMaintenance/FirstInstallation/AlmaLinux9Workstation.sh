@@ -115,7 +115,6 @@ sh -c "$(wget -O- https://install.ohmyz.sh)" "" --unattended
 
 # 开启 Oh My Zsh 自动更新
 sed -i "s/# zstyle ':omz:update' mode auto/zstyle ':omz:update' mode auto/g" /root/.zshrc
-zsh
 
 # 使用 OSC 1337 协议向远程 shell 报告 CWD
 if [ "$(grep -c 'export PS1=' '/root/.bash_profile')" -eq '0' ]; then
