@@ -74,6 +74,7 @@ firewall-cmd --permanent --zone=public --add-service=https
 firewall-cmd --permanent --zone=public --add-service=http3
 firewall-cmd --permanent --zone=public --new-service=podman-container
 firewall-cmd --permanent --service=podman-container --add-port=51300-51399/tcp --add-port=51300-51399/udp
+firewall-cmd --permanent --zone=public --add-service=podman-container
 firewall-cmd --permanent --service=ssh --add-port=51200/tcp
 firewall-cmd --permanent --service=ssh --remove-port=22/tcp
 firewall-cmd --permanent --service=cockpit --add-port=51201/tcp

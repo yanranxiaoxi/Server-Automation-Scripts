@@ -82,6 +82,7 @@ sysctl -p /etc/sysctl.d/99-tailscale.conf
 firewall-cmd --permanent --add-masquerade
 firewall-cmd --permanent --zone=public --new-service=tailscale
 firewall-cmd --permanent --service=tailscale --add-port=41641/udp
+firewall-cmd --permanent --zone=public --add-service=tailscale
 firewall-cmd --reload
 
 # Run!
