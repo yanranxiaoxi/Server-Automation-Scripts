@@ -137,7 +137,7 @@ systemctl enable netavark-firewalld-reload.service
 podman network create --ipv6 --gateway fd00::1:8:1 --subnet fd00::1:8:0/112 --gateway 10.90.0.1 --subnet 10.90.0.0/16 podman1
 
 # 将默认 Shell 设置为 Zsh
-chsh -s $(which zsh)
+chsh -s "$(which zsh)"
 
 # 安装 Oh My Zsh
 sh -c "$(wget -O- https://install.ohmyz.sh)" "" --unattended
@@ -146,12 +146,29 @@ sh -c "$(wget -O- https://install.ohmyz.sh)" "" --unattended
 sed -i "s/# zstyle ':omz:update' mode auto/zstyle ':omz:update' mode auto/g" /root/.zshrc
 
 # 设置 vi
-echo "\nset ts=4" >>/etc/virc
-echo "set ai" >>/etc/virc
+if [ "$(grep -c '^set ts=4' '/etc/virc')" -eq '0' ]; then
+	{
+		echo ""
+		echo "set ts=4"
+	} >>/etc/virc
+fi
+if [ "$(grep -c '^set ai' '/etc/virc')" -eq '0' ]; then
+	{
+		echo ""
+		echo "set ai"
+	} >>/etc/virc
+fi
 
 # 使用 OSC 1337 协议向远程 shell 报告 CWD
 if [ "$(grep -c 'export PS1=' '/root/.bash_profile')" -eq '0' ]; then
 	printf "export PS1=\"\$PS1\\[\\\e]1337;CurrentDir=\"'\$(pwd)\\\a\\]'" >>/root/.bash_profile
+fi
+if [ "$(grep -c 'precmd () { echo -n "\\x1b]1337;CurrentDir=$(pwd)\\x07" }' '/root/.zshrc')" -eq '0' ]; then
+	{
+		echo ""
+		echo "# 使用 OSC 1337 协议向远程 shell 报告 CWD"
+		printf "precmd () { echo -n \"\\\x1b]1337;CurrentDir=\$(pwd)\\\x07\" }"
+	} >>/root/.zshrc
 fi
 
 echo "操作已完成，请检查后续步骤并尽快重启以应用所有配置"

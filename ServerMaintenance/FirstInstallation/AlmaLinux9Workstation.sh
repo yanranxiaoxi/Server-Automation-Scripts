@@ -109,7 +109,7 @@ systemctl enable netavark-firewalld-reload.service
 podman network create --ipv6 --gateway fd00::1:8:1 --subnet fd00::1:8:0/112 --gateway 10.90.0.1 --subnet 10.90.0.0/16 podman1
 
 # 将默认 Shell 设置为 Zsh
-chsh -s $(which zsh)
+chsh -s "$(which zsh)"
 
 # 安装 Oh My Zsh
 sh -c "$(wget -O- https://install.ohmyz.sh)" "" --unattended
@@ -117,14 +117,30 @@ sh -c "$(wget -O- https://install.ohmyz.sh)" "" --unattended
 # 开启 Oh My Zsh 自动更新
 sed -i "s/# zstyle ':omz:update' mode auto/zstyle ':omz:update' mode auto/g" /root/.zshrc
 
+# 设置 vi
+if [ "$(grep -c '^set ts=4' '/etc/virc')" -eq '0' ]; then
+	{
+		echo ""
+		echo "set ts=4"
+	} >>/etc/virc
+fi
+if [ "$(grep -c '^set ai' '/etc/virc')" -eq '0' ]; then
+	{
+		echo ""
+		echo "set ai"
+	} >>/etc/virc
+fi
+
 # 使用 OSC 1337 协议向远程 shell 报告 CWD
 if [ "$(grep -c 'export PS1=' '/root/.bash_profile')" -eq '0' ]; then
 	printf "export PS1=\"\$PS1\\[\\\e]1337;CurrentDir=\"'\$(pwd)\\\a\\]'" >>/root/.bash_profile
 fi
-if [ "$(grep -c 'precmd () { echo -n \"\\\x1b]1337;CurrentDir=\$(pwd)\\\x07\" }' '/root/.zshrc')" -eq '0' ]; then
-	echo "" >>/root/.zshrc
-	echo "# 使用 OSC 1337 协议向远程 shell 报告 CWD" >>/root/.zshrc
-	echo "precmd () { echo -n \"\\\x1b]1337;CurrentDir=\$(pwd)\\\x07\" }" >>/root/.zshrc
+if [ "$(grep -c 'precmd () { echo -n "\\x1b]1337;CurrentDir=$(pwd)\\x07" }' '/root/.zshrc')" -eq '0' ]; then
+	{
+		echo ""
+		echo "# 使用 OSC 1337 协议向远程 shell 报告 CWD"
+		printf "precmd () { echo -n \"\\\x1b]1337;CurrentDir=\$(pwd)\\\x07\" }"
+	} >>/root/.zshrc
 fi
 
 # 加载 KVM 内核模块并启用 libvirtd 服务
@@ -163,7 +179,7 @@ rpm --import https://packages.microsoft.com/yumrepos/vscode/repodata/repomd.xml.
 dnf install code -y
 
 # 安装 Tabby
-wget https://packagecloud.io/install/repositories/eugeny/tabby/config_file.repo?os=redhatenterpriseserver&dist=9&source=script -O /etc/yum.repos.d/tabby.repo
+wget "https://packagecloud.io/install/repositories/eugeny/tabby/config_file.repo?os=redhatenterpriseserver&dist=9&source=script" -O /etc/yum.repos.d/tabby.repo
 dnf config-manager --disable eugeny_tabby-source
 rpm --import https://packagecloud.io/eugeny/tabby/gpgkey
 dnf install tabby-terminal -y

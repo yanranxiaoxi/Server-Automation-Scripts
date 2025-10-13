@@ -1,3 +1,5 @@
+#!/bin/bash
+
 dnf config-manager --set-enabled crb
 dnf install epel-release -y
 dnf upgrade
