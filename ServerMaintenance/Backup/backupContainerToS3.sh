@@ -57,7 +57,7 @@ backupFolders=$(ls /"${containerType}"directory/)
 mkdir -p /"${containerType}"directorybackup/"${backupDay}"/
 cd /"${containerType}"directory/ || exit
 for folderName in ${backupFolders}; do
-	tar zcvf /"${containerType}"directorybackup/"${backupDay}"/backup_"${folderName}"_"${backupDate}".tar.gz "${folderName}"/
+	tar -zcvf /"${containerType}"directorybackup/"${backupDay}"/backup_"${folderName}"_"${backupDate}".tar.gz "${folderName}"/
 done
 
 # 识别系统架构并下载 MinIO Client

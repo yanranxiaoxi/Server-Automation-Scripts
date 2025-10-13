@@ -72,7 +72,7 @@ if [ ! -f "all_databases.sql" ]; then
 	exit
 fi
 mkdir -p /databasebackup/upload/
-tar zcvf /databasebackup/upload/backup_"${containerName}"_all_databases_"${backupDate}".tar.gz all_databases.sql
+tar -zcvf /databasebackup/upload/backup_"${containerName}"_all_databases_"${backupDate}".tar.gz all_databases.sql
 
 # 使用 MinIO Client 将数据上传到 S3 服务器
 /podmandirectorybackup/mc cp --storage-class="${s3StorageClass}" /databasebackup/upload/backup_"${containerName}"_all_databases_"${backupDate}".tar.gz "${serverName}"/"${s3BucketName}"/"${serverName}"/"${backupDay}"/
