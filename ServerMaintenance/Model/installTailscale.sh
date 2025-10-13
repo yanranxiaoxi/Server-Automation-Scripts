@@ -74,9 +74,18 @@ systemctl enable --now tailscaled.service
 chattr -i /etc/resolv.conf
 
 # 启用端口转发
-echo 'net.ipv4.ip_forward = 1' | tee -a /etc/sysctl.d/99-tailscale.conf
-echo 'net.ipv6.conf.all.forwarding = 1' | tee -a /etc/sysctl.d/99-tailscale.conf
+echo 'net.ipv4.ip_forward = 1' >/etc/sysctl.d/99-tailscale.conf
+echo 'net.ipv6.conf.all.forwarding = 1' >>/etc/sysctl.d/99-tailscale.conf
 sysctl -p /etc/sysctl.d/99-tailscale.conf
+
+# 检查并修改 GCE 网络安全配置以兼容 Tailscale
+if [[ -f "/etc/sysctl.d/60-gce-network-security.conf" ]]; then
+	if grep -q "net.ipv4.conf.all.rp_filter = 1" "/etc/sysctl.d/60-gce-network-security.conf"; then
+		echo "检测到 GCE 网络安全配置，正在修改 rp_filter 设置以兼容 Tailscale"
+		sed -i 's/net.ipv4.conf.all.rp_filter = 1/net.ipv4.conf.all.rp_filter = 2/g' /etc/sysctl.d/60-gce-network-security.conf
+		sysctl -p /etc/sysctl.d/60-gce-network-security.conf
+	fi
+fi
 
 # 配置防火墙，启用 EasyNAT
 firewall-cmd --permanent --add-masquerade
