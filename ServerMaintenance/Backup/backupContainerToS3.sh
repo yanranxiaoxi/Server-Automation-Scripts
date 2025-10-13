@@ -22,10 +22,8 @@ s3ApiAddress=$5
 s3BucketName=$6
 # S3 存储类
 s3StorageClass=$7
-# 是否首次安装，是则填写 'firstRun'，将会自动注册到 crontab
-firstRun=$8
 # 定时任务执行时刻
-timerTime=$9
+timerTime=$8
 
 # 检查变量
 if [[ -z "${serverName}" || -z "${s3AccessKey}" || -z "${s3SecretKey}" || -z "${s3ApiAddress}" ]]; then
@@ -70,7 +68,7 @@ if [ ! -f "/${containerType}directorybackup/mc" ]; then
 	elif [[ ${cpuArch} =~ "ppc64le" ]]; then
 		mcDownloadUrl="https://dl.min.io/client/mc/release/linux-ppc64le/mc"
 	else
-		echo "Fatal error: unsupport CPU arch!"
+		echo "Fatal error: unsupported CPU architecture!"
 		exit
 	fi
 	curl "${mcDownloadUrl}" --create-dirs -o /"${containerType}"directorybackup/mc
@@ -85,10 +83,11 @@ cd /"${containerType}"directorybackup/ || exit
 # 清理文件
 find . -type d | sed -n '2,$p' | xargs rm -rf
 
-# 创建系统定时任务
-if [[ ${firstRun} =~ "firstRun" ]]; then
-	# cron="${timerTime} root wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh ${serverName} ${containerType} ${s3AccessKey} ${s3SecretKey} ${s3ApiAddress} ${s3BucketName} ${s3StorageClass} && rm -f ~/backupContainerToS3.sh"
-	# sed -i -e $'$a\\\n'"${cron}" /etc/crontab
-	echo "${timerTime} root wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh ${serverName} ${containerType} ${s3AccessKey} ${s3SecretKey} ${s3ApiAddress} ${s3BucketName} ${s3StorageClass} && rm -f ~/backupContainerToS3.sh" >>/etc/crontab
-	systemctl restart crond
+# 检查并移除 /etc/crontab 中已存在的备份任务
+if grep -q "wget -O ~/backupContainerToS3.sh" /etc/crontab; then
+	sed -i '/wget -O ~\/backupContainerToS3.sh/d' /etc/crontab
 fi
+
+# 创建系统定时任务
+echo "${timerTime} root wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh ${serverName} ${containerType} ${s3AccessKey} ${s3SecretKey} ${s3ApiAddress} ${s3BucketName} ${s3StorageClass} ${timerTime} && rm -f ~/backupContainerToS3.sh" >/etc/cron.d/backupContainerToS3.cron
+systemctl restart crond

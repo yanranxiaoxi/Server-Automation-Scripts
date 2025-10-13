@@ -9,7 +9,7 @@
 #### 将容器数据备份到 S3 / backupContainerToS3
 
 ```shell
-wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh "${serverName}" "${containerType}" "${s3AccessKey}" "${s3SecretKey}" "${s3ApiAddress}" "${s3BucketName}" "${s3StorageClass}" "firstRun" "${timerTime}" && rm -f ~/backupContainerToS3.sh
+wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh "${serverName}" "${containerType}" "${s3AccessKey}" "${s3SecretKey}" "${s3ApiAddress}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}" && rm -f ~/backupContainerToS3.sh
 ```
 
 #### 将 MariaDB 10 数据库备份到 S3 / backupMariaDB10DatabaseToS3

@@ -43,6 +43,7 @@
         "swapfile",
         "tailscaled",
         "timedatectl",
+        "typecho",
         "virc",
         "virt",
         "virtio",
