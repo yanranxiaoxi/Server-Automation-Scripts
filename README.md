@@ -141,7 +141,7 @@ curl -fsSL https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux
 #### 安装 acme.sh / installAcme
 
 ```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Cert/installAcme.sh | sudo bash
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Cert/installAcme.sh | sudo bash -s -- "${acmeEmail}" "${chinaNet}"
 ```
 
 #### 使用 Cloudflare DNS API 获取证书 / getCertWithCloudflare
