@@ -14,7 +14,7 @@ derpDomain=$1
 # 检查变量
 if [[ -z "${derpDomain}" ]]; then
 	echo "错误：输入变量不正确"
-	exit
+	exit 1
 fi
 
 # 检查证书文件是否存在

@@ -14,7 +14,7 @@ pages:
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
   script:
-    - cp -r ./Container/ ./PublicKey/ ./ServerMaintenance/ ./Temp/ ./public/
+    - cp -r ./Container/ ./PublicKey/ ./ServerMaintenance/ ./public/
   pages: true
   artifacts:
     paths:

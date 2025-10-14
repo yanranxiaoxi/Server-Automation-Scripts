@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Model - installAcme
+# Cert - installAcme
 #
 # 安装 acme.sh
 #
@@ -13,6 +13,13 @@ acmeEmail=$1
 # 是否处于中国大陆网络环境（true/false）
 chinaNet=$2
 
+# 检查变量
+if [[ -z "${acmeEmail}" ]]; then
+	echo "错误：输入变量不正确"
+	exit 1
+fi
+
+# 判断克隆地址
 cloneUrl="https://github.com/acmesh-official/acme.sh.git"
 if [[ "${chinaNet}" == "true" ]]; then
 	cloneUrl="https://gitee.com/neilpang/acme.sh.git"

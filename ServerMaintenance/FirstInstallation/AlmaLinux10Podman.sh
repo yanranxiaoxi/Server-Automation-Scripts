@@ -11,7 +11,7 @@
 # 检测操作系统版本
 if [ ! "$(grep -c ' release 10.' '/etc/redhat-release')" -eq '1' ]; then
 	echo "错误：操作系统版本非 RHEL 10 like"
-	exit
+	exit 1
 fi
 
 # SSH 公钥
@@ -24,7 +24,7 @@ staticHostname=$3
 # 检查变量
 if [[ -z "${sshPublicKey}" || -z "${prettyHostname}" || -z "${staticHostname}" ]]; then
 	echo "错误：输入变量不正确"
-	exit
+	exit 1
 fi
 
 # 安装依赖程序

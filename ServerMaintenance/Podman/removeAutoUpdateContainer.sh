@@ -14,7 +14,7 @@ containerName=$1
 # 检查变量
 if [[ -z "${containerName}" ]]; then
 	echo "错误：输入变量不正确"
-	exit
+	exit 1
 fi
 
 # 禁用服务

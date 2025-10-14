@@ -14,7 +14,7 @@ containerType=$1
 # 检查变量
 if [[ -z "${containerType}" ]]; then
 	echo "错误：输入变量不正确"
-	exit
+	exit 1
 fi
 
 dnf install -y git

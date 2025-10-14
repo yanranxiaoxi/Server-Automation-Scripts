@@ -30,7 +30,7 @@ timerTime=$7
 # 检查变量
 if [[ -z "${serverName}" ]]; then
 	echo "错误：输入变量不正确"
-	exit
+	exit 1
 fi
 if [[ -z "${containerName}" ]]; then
 	containerName="postgres17"
@@ -51,7 +51,7 @@ fi
 # 检查环境
 if [ ! -f "/podmandirectorybackup/mc" ]; then
 	echo "错误：请先配置服务器容器备份"
-	exit
+	exit 1
 fi
 
 # 自动生成归档时间信息
@@ -70,7 +70,7 @@ fi
 cd /databasebackup/"${containerName}"/ || exit
 if [ ! -f "all_databases.out" ]; then
 	echo "错误：待备份数据库文件不存在"
-	exit
+	exit 1
 fi
 mkdir -p /databasebackup/upload/
 tar -zcvf /databasebackup/upload/backup_"${containerName}"_all_databases_"${backupDate}".tar.gz all_databases.out

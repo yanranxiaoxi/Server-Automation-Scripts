@@ -28,7 +28,7 @@ timerTime=$8
 # 检查变量
 if [[ -z "${serverName}" || -z "${s3AccessKey}" || -z "${s3SecretKey}" || -z "${s3ApiAddress}" ]]; then
 	echo "错误：输入变量不正确"
-	exit
+	exit 1
 fi
 if [[ -z "${containerType}" ]]; then
 	containerType="podman"
@@ -69,7 +69,7 @@ if [ ! -f "/${containerType}directorybackup/mc" ]; then
 		mcDownloadUrl="https://dl.min.io/client/mc/release/linux-ppc64le/mc"
 	else
 		echo "Fatal error: unsupported CPU architecture!"
-		exit
+		exit 1
 	fi
 	curl "${mcDownloadUrl}" --create-dirs -o /"${containerType}"directorybackup/mc
 	chmod +x /"${containerType}"directorybackup/mc
