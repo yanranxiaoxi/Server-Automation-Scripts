@@ -19,8 +19,8 @@
   - [AlmaLinux 10 + Podman / AlmaLinux10Podman](#almalinux-10--podman--almalinux10podman)
   - [AlmaLinux 10 + Podman Public Image / AlmaLinux10PodmanPublicImage](#almalinux-10--podman-public-image--almalinux10podmanpublicimage)
 - [证书管理 / Cert](#证书管理--cert)
-  - [使用 Cloudflare DNS API 获取证书 / getCertWithCloudflare](#使用-cloudflare-dns-api-获取证书--getcertwithcloudflare)
   - [安装 acme.sh / installAcme](#安装-acmesh--installacme)
+  - [使用 Cloudflare DNS API 获取证书 / getCertWithCloudflare](#使用-cloudflare-dns-api-获取证书--getcertwithcloudflare)
   - [安装证书 / installCert](#安装证书--installcert)
 - [额外模块 / Model](#额外模块--model)
   - [安装 Tailscale / installTailscale](#安装-tailscale--installtailscale)
@@ -138,16 +138,16 @@ curl -fsSL https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux
 
 ### 证书管理 / Cert
 
-#### 使用 Cloudflare DNS API 获取证书 / getCertWithCloudflare
-
-```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Cert/getCertWithCloudflare.sh | sudo bash -s -- "${domainName}" "${cloudflareToken}" "${cloudflareAccountID}"
-```
-
 #### 安装 acme.sh / installAcme
 
 ```bash
 curl -fsSL https://sh.soraharu.com/ServerMaintenance/Cert/installAcme.sh | sudo bash
+```
+
+#### 使用 Cloudflare DNS API 获取证书 / getCertWithCloudflare
+
+```bash
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Cert/getCertWithCloudflare.sh | sudo bash -s -- "${domainName}" "${cloudflareToken}" "${cloudflareAccountID}"
 ```
 
 #### 安装证书 / installCert
