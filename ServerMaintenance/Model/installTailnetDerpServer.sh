@@ -20,7 +20,6 @@ fi
 # 检查证书文件是否存在
 certFile="/podmandirectory/derper-server/certs/${derpDomain}.crt"
 keyFile="/podmandirectory/derper-server/certs/${derpDomain}.key"
-
 if [[ ! -f "${certFile}" || ! -f "${keyFile}" ]]; then
 	echo "错误：证书文件不存在"
 	echo "缺少文件：${certFile} 或 ${keyFile}"
@@ -51,6 +50,9 @@ podman container run \
     --volume=/podmandirectory/derper-server/certs/:/app/certs/ \
     --volume=/var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock \
     ghcr.io/fredliang44/derper:latest
+
+# 配置容器自动更新
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Podman/newAutoUpdateContainer.sh | bash -s -- "derper-server"
 
 # 配置防火墙，启用 STUN 服务端口
 firewall-cmd --permanent --zone=public --new-service=stun

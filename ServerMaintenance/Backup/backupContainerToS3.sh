@@ -89,5 +89,5 @@ if grep -q "wget -O ~/backupContainerToS3.sh" /etc/crontab; then
 fi
 
 # 创建系统定时任务
-echo "${timerTime} root wget -O ~/backupContainerToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh && sh ~/backupContainerToS3.sh ${serverName} ${containerType} ${s3AccessKey} ${s3SecretKey} ${s3ApiAddress} ${s3BucketName} ${s3StorageClass} ${timerTime} && rm -f ~/backupContainerToS3.sh" >/etc/cron.d/backupContainerToS3.cron
+echo "${timerTime} root curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh | bash -s -- ${serverName} ${containerType} ${s3AccessKey} ${s3SecretKey} ${s3ApiAddress} ${s3BucketName} ${s3StorageClass} ${timerTime}" >/etc/cron.d/backupContainerToS3.cron
 systemctl restart crond

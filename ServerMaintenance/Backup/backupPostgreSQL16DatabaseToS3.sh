@@ -83,5 +83,5 @@ rm -f /databasebackup/upload/backup_"${containerName}"_all_databases_"${backupDa
 rm -f /databasebackup/"${containerName}"/all_databases.out
 
 # 创建系统定时任务
-echo "${timerTime} root wget -O ~/backupPostgreSQL16DatabaseToS3.sh https://sh.soraharu.com/ServerMaintenance/Backup/backupPostgreSQL16DatabaseToS3.sh && sh ~/backupPostgreSQL16DatabaseToS3.sh \"${serverName}\" \"${containerName}\" \"${databaseUser}\" \"${databasePassword}\" \"${s3BucketName}\" \"${s3StorageClass}\" \"${timerTime}\" && rm -f ~/backupPostgreSQL16DatabaseToS3.sh" >/etc/cron.d/backupPostgreSQL16DatabaseToS3."${containerName}".cron
+echo "${timerTime} root curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupPostgreSQL16DatabaseToS3.sh | bash -s -- \"${serverName}\" \"${containerName}\" \"${databaseUser}\" \"${databasePassword}\" \"${s3BucketName}\" \"${s3StorageClass}\" \"${timerTime}\"" >/etc/cron.d/backupPostgreSQL16DatabaseToS3."${containerName}".cron
 systemctl restart crond

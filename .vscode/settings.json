@@ -44,6 +44,8 @@
         "setenforce",
         "storaged",
         "swapfile",
+        "swapoff",
+        "swapon",
         "Tailnet",
         "tailscaled",
         "timedatectl",

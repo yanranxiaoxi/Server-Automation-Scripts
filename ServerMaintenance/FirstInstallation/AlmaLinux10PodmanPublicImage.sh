@@ -49,9 +49,7 @@ hostnamectl set-hostname --static "xiaoxis-almalinux"
 # 设置 DNS
 echo "nameserver 8.8.8.8" >/etc/resolv.conf # 临时 IPv4 DNS 解析服务器
 echo "nameserver 2001:4860:4860::8888" >>/etc/resolv.conf # 临时 IPv6 DNS 解析服务器
-wget -O ~/setGoogle.sh https://sh.soraharu.com/ServerMaintenance/DNS/setGoogle.sh
-sh ~/setGoogle.sh
-rm -f ~/setGoogle.sh
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/DNS/setGoogle.sh | bash
 
 # 配置防火墙规则
 systemctl enable --now firewalld.service
