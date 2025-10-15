@@ -22,6 +22,11 @@
   - [安装 acme.sh / installAcme](#安装-acmesh--installacme)
   - [使用 Cloudflare DNS API 获取证书 / getCertWithCloudflare](#使用-cloudflare-dns-api-获取证书--getcertwithcloudflare)
   - [安装证书 / installCert](#安装证书--installcert)
+- [DNS 管理 / DNS](#dns-管理--dns)
+  - [设置 AdGuard DNS / setAdGuard](#设置-adguard-dns--setadguard)
+  - [设置 Cloudflare DNS / setCloudflare](#设置-cloudflare-dns--setcloudflare)
+  - [设置 Google DNS / setGoogle](#设置-google-dns--setgoogle)
+  - [设置 Yandex DNS / setYandex](#设置-yandex-dns--setyandex)
 - [额外模块 / Model](#额外模块--model)
   - [安装 Tailscale / installTailscale](#安装-tailscale--installtailscale)
   - [安装 Tailnet DERP 服务器 / installTailnetDerpServer](#安装-tailnet-derp-服务器--installtailnetderpserver)
@@ -38,6 +43,8 @@
 
 - [caddy2](#caddy2)
   - [自动同步 Nice Caddyfile 中的复用块 / autoSyncNiceCaddyfile](#自动同步-nice-caddyfile-中的复用块--autosyncoicecaddyfile)
+- [elasticsearch](#elasticsearch)
+  - [系统内核参数配置 / sysctl](#系统内核参数配置--sysctl)
 - [gitlab](#gitlab)
   - [定时任务 / cron](#定时任务--cron)
 - [gitlab-pages](#gitlab-pages)
@@ -46,8 +53,13 @@
   - [定时任务 / cron](#定时任务--cron-2)
 - [image-transfer-station](#image-transfer-station)
   - [定时任务 / cron](#定时任务--cron-3)
+- [keycloak](#keycloak)
+  - [系统内核参数配置 / sysctl](#系统内核参数配置--sysctl-1)
 - [mastodon](#mastodon)
   - [定时任务 / cron](#定时任务--cron-4)
+  - [系统内核参数配置 / sysctl](#系统内核参数配置--sysctl-2)
+- [redis](#redis)
+  - [系统内核参数配置 / sysctl](#系统内核参数配置--sysctl-3)
 - [typecho](#typecho)
   - [定时任务 / cron](#定时任务--cron-5)
 
@@ -156,6 +168,32 @@ curl -fsSL https://sh.soraharu.com/ServerMaintenance/Cert/getCertWithCloudflare.
 curl -fsSL https://sh.soraharu.com/ServerMaintenance/Cert/installCert.sh | sudo bash -s -- "${domainName}" "${fullChainFilePath}" "${privateKeyFilePath}" "${reloadCommand}"
 ```
 
+### DNS 管理 / DNS
+
+#### 设置 AdGuard DNS / setAdGuard
+
+```bash
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/DNS/setAdGuard.sh | sudo bash
+```
+
+#### 设置 Cloudflare DNS / setCloudflare
+
+```bash
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/DNS/setCloudflare.sh | sudo bash
+```
+
+#### 设置 Google DNS / setGoogle
+
+```bash
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/DNS/setGoogle.sh | sudo bash
+```
+
+#### 设置 Yandex DNS / setYandex
+
+```bash
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/DNS/setYandex.sh | sudo bash
+```
+
 ### 额外模块 / Model
 
 #### 安装 Tailscale / installTailscale
@@ -220,6 +258,14 @@ curl -fsSL https://sh.soraharu.com/ServerMaintenance/Swap/removeSwap.sh | sudo b
 curl -fsSL https://sh.soraharu.com/Container/caddy2/autoSyncNiceCaddyfile.sh | sudo bash -s -- "${containerType}"
 ```
 
+### elasticsearch
+
+#### 系统内核参数配置 / sysctl
+
+```bash
+curl -fsSL https://sh.soraharu.com/Container/elasticsearch/sysctl.sh | sudo bash
+```
+
 ### gitlab
 
 #### 定时任务 / cron
@@ -252,12 +298,34 @@ curl -fsSL https://sh.soraharu.com/Container/gitlab-runner/cron.sh | sudo bash
 curl -fsSL https://sh.soraharu.com/Container/image-transfer-station/cron.sh | sudo bash
 ```
 
+### keycloak
+
+#### 系统内核参数配置 / sysctl
+
+```bash
+curl -fsSL https://sh.soraharu.com/Container/keycloak/sysctl.sh | sudo bash
+```
+
 ### mastodon
 
 #### 定时任务 / cron
 
 ```bash
 curl -fsSL https://sh.soraharu.com/Container/mastodon/cron.sh | sudo bash
+```
+
+#### 系统内核参数配置 / sysctl
+
+```bash
+curl -fsSL https://sh.soraharu.com/Container/mastodon/sysctl.sh | sudo bash
+```
+
+### redis
+
+#### 系统内核参数配置 / sysctl
+
+```bash
+curl -fsSL https://sh.soraharu.com/Container/redis/sysctl.sh | sudo bash
 ```
 
 ### typecho
