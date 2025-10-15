@@ -22,12 +22,12 @@ dnf install -y git
 if [ ! -f "/${containerType}directory/caddy2/config/reuse/README.md" ]; then
 	git clone --depth=1 https://gitlab.soraharu.com/XiaoXi/Nice-Caddyfile.git /"${containerType}"directory/caddy2/config/reuse/
 else
-	cd /"${containerType}"directory/caddy2/config/reuse/ || exit
+	cd /"${containerType}"directory/caddy2/config/reuse/ || exit 1
 	git reset --hard
 	git pull
 fi
 # systemctl restart container-caddy2
 
 # 创建系统定时任务
-echo "0 1 * * * root wget -O ~/autoSyncNiceCaddyfile.sh https://sh.soraharu.com/Container/caddy2/autoSyncNiceCaddyfile.sh && sh ~/autoSyncNiceCaddyfile.sh \"${containerType}\" && rm -f ~/autoSyncNiceCaddyfile.sh" >/etc/cron.d/autoSyncNiceCaddyfile.cron
+echo "0 1 * * * root curl -fsSL https://sh.soraharu.com/Container/caddy2/autoSyncNiceCaddyfile.sh | bash -s -- \"${containerType}\"" >/etc/cron.d/autoSyncNiceCaddyfile.cron
 systemctl restart crond

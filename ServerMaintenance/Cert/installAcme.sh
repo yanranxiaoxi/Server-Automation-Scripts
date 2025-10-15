@@ -28,8 +28,8 @@ fi
 # 安装 acme.sh
 rm -rf /root/acme.sh/
 rm -rf /root/.acme.sh/
-cd ~ || exit
+cd ~ || exit 1
 git clone "${cloneUrl}"
-cd acme.sh || exit
+cd acme.sh || exit 1
 ./acme.sh --install --accountemail "${acmeEmail}"
 rm -rf /root/acme.sh/
