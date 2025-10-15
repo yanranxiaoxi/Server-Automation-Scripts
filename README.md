@@ -28,6 +28,7 @@
   - [设置 Google DNS / setGoogle](#设置-google-dns--setgoogle)
   - [设置 Yandex DNS / setYandex](#设置-yandex-dns--setyandex)
 - [额外模块 / Model](#额外模块--model)
+  - [安装 NVIDIA 驱动程序 / installNvidiaDriver](#安装-nvidia-驱动程序--installnvidiadriver)
   - [安装 Tailscale / installTailscale](#安装-tailscale--installtailscale)
   - [安装 Tailnet DERP 服务器 / installTailnetDerpServer](#安装-tailnet-derp-服务器--installtailnetderpserver)
 - [Podman 容器管理 / Podman](#podman-容器管理--podman)
@@ -195,6 +196,18 @@ curl -fsSL https://sh.soraharu.com/ServerMaintenance/DNS/setYandex.sh | sudo bas
 ```
 
 ### 额外模块 / Model
+
+#### 安装 NVIDIA 驱动程序 / installNvidiaDriver
+
+```bash
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Model/installNvidiaDriver.sh | sudo bash
+```
+
+脚本执行完成后续执行：
+
+1. 重启服务器以加载 NVIDIA 内核模块
+
+**注意**：此脚本仅支持 AlmaLinux 9 及以上版本
 
 #### 安装 Tailscale / installTailscale
 
