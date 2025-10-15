@@ -71,37 +71,37 @@
 #### 将容器数据备份到 S3 / backupContainerToS3
 
 ```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh | sudo bash -s -- "${serverName}" "${containerType}" "${s3AccessKey}" "${s3SecretKey}" "${s3ApiAddress}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh | sudo bash -s -- "${serverName}" "podman" "${s3AccessKey}" "${s3SecretKey}" "${s3ApiAddress}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
 ```
 
 #### 将 MariaDB 10 数据库备份到 S3 / backupMariaDB10DatabaseToS3
 
 ```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB10DatabaseToS3.sh | sudo bash -s -- "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB10DatabaseToS3.sh | sudo bash -s -- "${serverName}" "podman" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
 ```
 
 #### 将 MariaDB 11 数据库备份到 S3 / backupMariaDB11DatabaseToS3
 
 ```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB11DatabaseToS3.sh | sudo bash -s -- "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB11DatabaseToS3.sh | sudo bash -s -- "${serverName}" "podman" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
 ```
 
 #### 将 PostgreSQL 14 数据库备份到 S3 / backupPostgreSQL14DatabaseToS3
 
 ```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupPostgreSQL14DatabaseToS3.sh | sudo bash -s -- "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupPostgreSQL14DatabaseToS3.sh | sudo bash -s -- "${serverName}" "podman" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
 ```
 
 #### 将 PostgreSQL 16 数据库备份到 S3 / backupPostgreSQL16DatabaseToS3
 
 ```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupPostgreSQL16DatabaseToS3.sh | sudo bash -s -- "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupPostgreSQL16DatabaseToS3.sh | sudo bash -s -- "${serverName}" "podman" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
 ```
 
 #### 将 PostgreSQL 17 数据库备份到 S3 / backupPostgreSQL17DatabaseToS3
 
 ```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupPostgreSQL17DatabaseToS3.sh | sudo bash -s -- "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupPostgreSQL17DatabaseToS3.sh | sudo bash -s -- "${serverName}" "podman" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
 ```
 
 ### 操作系统初始化配置 / FirstInstallation
@@ -268,7 +268,7 @@ curl -fsSL https://sh.soraharu.com/ServerMaintenance/Swap/removeSwap.sh | sudo b
 #### 自动同步 Nice Caddyfile 中的复用块 / autoSyncNiceCaddyfile
 
 ```bash
-curl -fsSL https://sh.soraharu.com/Container/caddy2/autoSyncNiceCaddyfile.sh | sudo bash -s -- "${containerType}"
+curl -fsSL https://sh.soraharu.com/Container/caddy2/autoSyncNiceCaddyfile.sh | sudo bash -s -- "podman"
 ```
 
 ### elasticsearch
