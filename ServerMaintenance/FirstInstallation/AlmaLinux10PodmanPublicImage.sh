@@ -39,8 +39,9 @@ systemctl daemon-reload
 systemctl enable --now kpatch.service
 dnf kpatch auto
 
-# 移除 Virtio-Balloon 驱动
-rmmod virtio_balloon
+# 移除 VirtIO-Balloon 驱动
+# #TODO# 在 GreenCloud 新版 VirtFusion 面板安装的服务器内执行导致死机，等待缓解
+# rmmod virtio_balloon
 
 # 设置主机名
 hostnamectl set-hostname --pretty "XiaoXi's AlmaLinux"
