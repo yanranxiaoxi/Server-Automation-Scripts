@@ -23,7 +23,7 @@ dnf makecache
 dnf update -y
 dnf install -y epel-release
 dnf config-manager --enable crb
-dnf install -y glibc-common langpacks-zh_CN dnf-plugins-core dnf-utils dnf-automatic kpatch kpatch-dnf passwd wget net-tools firewalld git git-lfs cockpit cockpit-packagekit cockpit-storaged cockpit-podman zsh util-linux-user ntfs-3g ibus ibus-libpinyin gvim gnome-tweaks gnome-extensions-app thunderbird darktable libreoffice-calc libreoffice-impress libreoffice-writer libreoffice-draw remmina kleopatra vlc qemu-kvm libvirt virt-manager virt-install bridge-utils filezilla
+dnf install -y glibc-common langpacks-zh_CN dnf-plugins-core dnf-utils dnf-automatic kpatch kpatch-dnf passwd wget net-tools firewalld git git-lfs cockpit cockpit-packagekit cockpit-storaged cockpit-podman zsh util-linux-user ntfs-3g ibus ibus-libpinyin gvim gnome-tweaks gnome-extensions-app thunderbird darktable libreoffice-calc libreoffice-impress libreoffice-writer libreoffice-draw remmina kleopatra vlc qemu-kvm libvirt virt-manager virt-install bridge-utils filezilla firefox
 
 # 设置系统语言为简体中文
 localectl set-locale "zh_CN.utf8"
@@ -144,17 +144,34 @@ if [ "$(grep -c 'precmd () { echo -n "\\x1b]1337;CurrentDir=$(pwd)\\x07" }' '/ro
 fi
 
 # 加载 KVM 内核模块并启用 libvirtd 服务
+CPU_VENDOR=$(lscpu | grep "Vendor ID" | awk '{print $3}')
+if [ -z "$CPU_VENDOR" ]; then
+	CPU_VENDOR=$(lscpu | grep "厂商 ID" | awk '{print $3}')
+fi
 modprobe kvm
-modprobe kvm_intel
-# modprobe kvm_amd
-echo "kvm" >/etc/modules-load.d/kvm.conf
-echo "kvm_intel" >>/etc/modules-load.d/kvm.conf
-# echo "kvm_amd" >>/etc/modules-load.d/kvm.conf
+if [ "$CPU_VENDOR" = "GenuineIntel" ]; then
+	echo "检测到 Intel CPU，加载 kvm_intel 模块"
+	modprobe kvm_intel
+	echo "kvm" >/etc/modules-load.d/kvm.conf
+	echo "kvm_intel" >>/etc/modules-load.d/kvm.conf
+elif [ "$CPU_VENDOR" = "AuthenticAMD" ]; then
+	echo "检测到 AMD CPU，加载 kvm_amd 模块"
+	modprobe kvm_amd
+	echo "kvm" >/etc/modules-load.d/kvm.conf
+	echo "kvm_amd" >>/etc/modules-load.d/kvm.conf
+else
+	echo "警告：未能识别 CPU 类型（$CPU_VENDOR），跳过 KVM 模块加载"
+fi
 systemctl enable --now libvirtd
 
 # 加载 KVM 需要的 IOMMU 内核模块
-sed -i.bak 's/GRUB_CMDLINE_LINUX="\(.*\)"/GRUB_CMDLINE_LINUX="\1 intel_iommu=on"/' /etc/default/grub
-# sed -i.bak 's/GRUB_CMDLINE_LINUX="\(.*\)"/GRUB_CMDLINE_LINUX="\1 amd_iommu=on"/' /etc/default/grub
+if [ "$CPU_VENDOR" = "GenuineIntel" ]; then
+	echo "配置 Intel IOMMU"
+	sed -i.bak 's/GRUB_CMDLINE_LINUX="\(.*\)"/GRUB_CMDLINE_LINUX="\1 intel_iommu=on"/' /etc/default/grub
+elif [ "$CPU_VENDOR" = "AuthenticAMD" ]; then
+	echo "配置 AMD IOMMU"
+	sed -i.bak 's/GRUB_CMDLINE_LINUX="\(.*\)"/GRUB_CMDLINE_LINUX="\1 amd_iommu=on"/' /etc/default/grub
+fi
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
 # 支持 LEGACY GPG 公钥
@@ -167,10 +184,10 @@ rpm --import https://yum.enpass.io/RPM-GPG-KEY-enpass-signing-key
 dnf install enpass -y
 
 # 安装 Microsoft Edge
-dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/edge/config.repo
-mv /etc/yum.repos.d/config.repo /etc/yum.repos.d/microsoft-edge.repo
-rpm --import https://packages.microsoft.com/yumrepos/edge/repodata/repomd.xml.key
-dnf install microsoft-edge-stable -y
+# dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/edge/config.repo
+# mv /etc/yum.repos.d/config.repo /etc/yum.repos.d/microsoft-edge.repo
+# rpm --import https://packages.microsoft.com/yumrepos/edge/repodata/repomd.xml.key
+# dnf install microsoft-edge-stable -y
 
 # 安装 Visual Studio Code
 dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/vscode/config.repo
@@ -183,6 +200,12 @@ wget "https://packagecloud.io/install/repositories/eugeny/tabby/config_file.repo
 dnf config-manager --disable eugeny_tabby-source
 rpm --import https://packagecloud.io/eugeny/tabby/gpgkey
 dnf install tabby-terminal -y
+
+# 安装 FirefoxPWA
+wget "https://packagecloud.io/install/repositories/filips/FirefoxPWA/config_file.repo?os=rpm_any&dist=rpm_any&source=script" -O /etc/yum.repos.d/firefoxpwa.repo
+dnf config-manager --disable filips_FirefoxPWA-source
+rpm --import https://packagecloud.io/filips/FirefoxPWA/gpgkey
+dnf install firefoxpwa -y
 
 # 启用 Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -198,9 +221,13 @@ flatpak install flathub net.agalwood.Motrix -y
 flatpak install flathub org.videolan.VLC -y
 flatpak install flathub it.mijorus.gearlever -y
 flatpak install flathub dev.deedles.Trayscale -y
+flatpak install flathub com.moonlight_stream.Moonlight -y
 
 # 移除应用
-dnf remove yelp gnome-user-docs firefox evolution -y
+dnf remove yelp gnome-user-docs evolution -y
+
+# FirefoxPWA 运行环境（以用户态运行）
+# cp -r /usr/lib64/firefox/ $HOME/.local/share/firefoxpwa/runtime/
 
 # 在 设置 -> Keyboard -> 添加输入源 -> 汉语 (中国) -> 中文 (智能拼音)
 # 在 gnome-tweaks 内进行主题配置 -> 应用程序 -> Adwaita-dark
