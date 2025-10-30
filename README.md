@@ -16,8 +16,10 @@
 - [操作系统初始化配置 / FirstInstallation](#操作系统初始化配置--firstinstallation)
   - [AlmaLinux 8 + Podman / AlmaLinux8Podman](#almalinux-8--podman--almalinux8podman)
   - [AlmaLinux 9 + Podman / AlmaLinux9Podman](#almalinux-9--podman--almalinux9podman)
+  - [AlmaLinux 9 + Workstation / AlmaLinux9Workstation](#almalinux-9--workstation--almalinux9workstation)
   - [AlmaLinux 10 + Podman / AlmaLinux10Podman](#almalinux-10--podman--almalinux10podman)
   - [AlmaLinux 10 + Podman Public Image / AlmaLinux10PodmanPublicImage](#almalinux-10--podman-public-image--almalinux10podmanpublicimage)
+  - [AlmaLinux 10 + Workstation / AlmaLinux10Workstation](#almalinux-10--workstation--almalinux10workstation)
 - [证书管理 / Cert](#证书管理--cert)
   - [安装 acme.sh / installAcme](#安装-acmesh--installacme)
   - [使用 Cloudflare DNS API 获取证书 / getCertWithCloudflare](#使用-cloudflare-dns-api-获取证书--getcertwithcloudflare)
@@ -27,6 +29,8 @@
   - [设置 Cloudflare DNS / setCloudflare](#设置-cloudflare-dns--setcloudflare)
   - [设置 Google DNS / setGoogle](#设置-google-dns--setgoogle)
   - [设置 Yandex DNS / setYandex](#设置-yandex-dns--setyandex)
+- [驱动配置 / Driver](#驱动配置--driver)
+  - [AlmaLinux 10 + Surface Pro 4 / AlmaLinux10SurfacePro4](#almalinux-10--surface-pro-4--almalinux10surfacepro4)
 - [额外模块 / Model](#额外模块--model)
   - [安装 Microsoft Edge 浏览器 / installMicrosoftEdge](#安装-microsoft-edge-浏览器--installmicrosoftedge)
   - [安装 NVIDIA 驱动程序 / installNvidiaDriver](#安装-nvidia-驱动程序--installnvidiadriver)
@@ -129,6 +133,12 @@ curl -fsSL https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux
 1. 使用 `passwd` 修改 root 用户密码
 2. 编辑 `/etc/motd` 以定义欢迎语
 
+#### AlmaLinux 9 + Workstation / AlmaLinux9Workstation
+
+```bash
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux9Workstation.sh | sudo bash
+```
+
 #### AlmaLinux 10 + Podman / AlmaLinux10Podman
 
 ```bash
@@ -149,6 +159,12 @@ curl -fsSL https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux
 脚本执行完成后续执行：
 
 1. 使用 `history -c` 清除历史记录
+
+#### AlmaLinux 10 + Workstation / AlmaLinux10Workstation
+
+```bash
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/FirstInstallation/AlmaLinux10Workstation.sh | sudo bash
+```
 
 ### 证书管理 / Cert
 
@@ -194,6 +210,14 @@ curl -fsSL https://sh.soraharu.com/ServerMaintenance/DNS/setGoogle.sh | sudo bas
 
 ```bash
 curl -fsSL https://sh.soraharu.com/ServerMaintenance/DNS/setYandex.sh | sudo bash
+```
+
+### 驱动配置 / Driver
+
+#### AlmaLinux 10 + Surface Pro 4 / AlmaLinux10SurfacePro4
+
+```bash
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Driver/AlmaLinux10SurfacePro4.sh | sudo bash
 ```
 
 ### 额外模块 / Model
