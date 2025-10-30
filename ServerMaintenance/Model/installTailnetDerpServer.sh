@@ -26,6 +26,14 @@ if [[ ! -f "${certFile}" || ! -f "${keyFile}" ]]; then
 	exit 1
 fi
 
+# 检查 tailscaled.sock 文件是否存在
+tailscaleSock="/var/run/tailscale/tailscaled.sock"
+if [[ ! -S "${tailscaleSock}" ]]; then
+	echo "错误：Tailscale socket 文件不存在，请确保 Tailscale 服务已安装并正在运行"
+	echo "缺少文件：${tailscaleSock}"
+	exit 1
+fi
+
 # 创建 derper-server 容器
 podman container run \
     --cpu-shares=1024 \
@@ -59,3 +67,5 @@ firewall-cmd --permanent --zone=public --new-service=stun
 firewall-cmd --permanent --service=stun --add-port=3478/tcp --add-port=3478/udp
 firewall-cmd --permanent --zone=public --add-service=stun
 firewall-cmd --reload
+
+echo "请注意在外部防火墙放行 3478/tcp 3478/udp 51303/tcp 端口"
