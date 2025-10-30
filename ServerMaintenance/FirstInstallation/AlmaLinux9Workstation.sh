@@ -201,12 +201,6 @@ dnf config-manager --disable eugeny_tabby-source
 rpm --import https://packagecloud.io/eugeny/tabby/gpgkey
 dnf install tabby-terminal -y
 
-# 安装 FirefoxPWA
-wget "https://packagecloud.io/install/repositories/filips/FirefoxPWA/config_file.repo?os=rpm_any&dist=rpm_any&source=script" -O /etc/yum.repos.d/firefoxpwa.repo
-dnf config-manager --disable filips_FirefoxPWA-source
-rpm --import https://packagecloud.io/filips/FirefoxPWA/gpgkey
-dnf install firefoxpwa -y
-
 # 启用 Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
