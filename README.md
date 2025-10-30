@@ -28,6 +28,7 @@
   - [设置 Google DNS / setGoogle](#设置-google-dns--setgoogle)
   - [设置 Yandex DNS / setYandex](#设置-yandex-dns--setyandex)
 - [额外模块 / Model](#额外模块--model)
+  - [安装 Microsoft Edge 浏览器 / installMicrosoftEdge](#安装-microsoft-edge-浏览器--installmicrosoftedge)
   - [安装 NVIDIA 驱动程序 / installNvidiaDriver](#安装-nvidia-驱动程序--installnvidiadriver)
   - [安装 Tailscale / installTailscale](#安装-tailscale--installtailscale)
   - [安装 Tailnet DERP 服务器 / installTailnetDerpServer](#安装-tailnet-derp-服务器--installtailnetderpserver)
@@ -196,6 +197,12 @@ curl -fsSL https://sh.soraharu.com/ServerMaintenance/DNS/setYandex.sh | sudo bas
 ```
 
 ### 额外模块 / Model
+
+#### 安装 Microsoft Edge 浏览器 / installMicrosoftEdge
+
+```bash
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Model/installMicrosoftEdge.sh | sudo bash
+```
 
 #### 安装 NVIDIA 驱动程序 / installNvidiaDriver
 

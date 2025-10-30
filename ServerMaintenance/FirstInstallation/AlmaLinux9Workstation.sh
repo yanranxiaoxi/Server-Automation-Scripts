@@ -183,12 +183,6 @@ mv /etc/yum.repos.d/enpass-yum.repo /etc/yum.repos.d/enpass.repo
 rpm --import https://yum.enpass.io/RPM-GPG-KEY-enpass-signing-key
 dnf install enpass -y
 
-# 安装 Microsoft Edge
-# dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/edge/config.repo
-# mv /etc/yum.repos.d/config.repo /etc/yum.repos.d/microsoft-edge.repo
-# rpm --import https://packages.microsoft.com/yumrepos/edge/repodata/repomd.xml.key
-# dnf install microsoft-edge-stable -y
-
 # 安装 Visual Studio Code
 dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/vscode/config.repo
 mv /etc/yum.repos.d/config.repo /etc/yum.repos.d/vscode.repo
@@ -219,9 +213,6 @@ flatpak install flathub com.moonlight_stream.Moonlight -y
 
 # 移除应用
 dnf remove yelp gnome-user-docs evolution -y
-
-# FirefoxPWA 运行环境（以用户态运行）
-# cp -r /usr/lib64/firefox/ $HOME/.local/share/firefoxpwa/runtime/
 
 # 在 设置 -> Keyboard -> 添加输入源 -> 汉语 (中国) -> 中文 (智能拼音)
 # 在 gnome-tweaks 内进行主题配置 -> 应用程序 -> Adwaita-dark
