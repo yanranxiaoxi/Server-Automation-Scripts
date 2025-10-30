@@ -87,6 +87,20 @@ if [[ -f "/etc/sysctl.d/60-gce-network-security.conf" ]]; then
 	fi
 fi
 
+# 配置 UDP 性能优化（仅 RHEL 10）
+if [[ "${RHEL_MAJOR}" == "10" ]]; then
+	echo "检测到 RHEL 10，配置 UDP 传输层卸载以提升性能"
+	tee /etc/NetworkManager/dispatcher.d/50-tailscale-udp-optimization > /dev/null <<'EOF'
+#!/bin/bash
+
+NETDEV=$(ip -o route get 8.8.8.8 | cut -f 5 -d " ")
+ethtool -K $NETDEV rx-udp-gro-forwarding on rx-gro-list off
+EOF
+	chmod 755 /etc/NetworkManager/dispatcher.d/50-tailscale-udp-optimization
+	# 立即应用设置
+	/etc/NetworkManager/dispatcher.d/50-tailscale-udp-optimization
+fi
+
 # 配置防火墙，启用 EasyNAT
 firewall-cmd --permanent --add-masquerade
 firewall-cmd --permanent --zone=public --new-service=tailscale
