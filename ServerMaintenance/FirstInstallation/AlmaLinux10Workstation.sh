@@ -190,7 +190,8 @@ rpm --import https://packages.microsoft.com/yumrepos/vscode/repodata/repomd.xml.
 dnf install code -y
 
 # 安装 Tabby
-wget "https://packagecloud.io/install/repositories/eugeny/tabby/config_file.repo?os=redhatenterpriseserver&dist=10&source=script" -O /etc/yum.repos.d/tabby.repo
+# 截至 2025/10/31，Tabby 尚未正式支持 RHEL 10，因此使用 RHEL 9 的源
+wget "https://packagecloud.io/install/repositories/eugeny/tabby/config_file.repo?os=redhatenterpriseserver&dist=9&source=script" -O /etc/yum.repos.d/tabby.repo
 dnf config-manager --disable eugeny_tabby-source
 rpm --import https://packagecloud.io/eugeny/tabby/gpgkey
 dnf install tabby-terminal -y
