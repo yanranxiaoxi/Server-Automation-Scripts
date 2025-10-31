@@ -39,7 +39,7 @@ fi
 if [[ -z "${s3StorageClass}" ]]; then
 	s3StorageClass="Standard"
 fi
-if [[ -z "${timerTime}" ]]; then
+if [[ -z "${timerTime}" || "${timerTime}" == "0" ]]; then
 	timerTime='0 3 * * *'
 fi
 
@@ -89,5 +89,5 @@ if grep -q "wget -O ~/backupContainerToS3.sh" /etc/crontab; then
 fi
 
 # 创建系统定时任务
-echo "${timerTime} root curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh | bash -s -- ${serverName} ${containerType} ${s3AccessKey} ${s3SecretKey} ${s3ApiAddress} ${s3BucketName} ${s3StorageClass} ${timerTime}" >/etc/cron.d/backupContainerToS3.cron
+echo "${timerTime} root curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.sh | bash -s -- \"${serverName}\" \"${containerType}\" \"${s3AccessKey}\" \"${s3SecretKey}\" \"${s3ApiAddress}\" \"${s3BucketName}\" \"${s3StorageClass}\" \"${timerTime}\"" >/etc/cron.d/backupContainerToS3.cron
 systemctl restart crond
