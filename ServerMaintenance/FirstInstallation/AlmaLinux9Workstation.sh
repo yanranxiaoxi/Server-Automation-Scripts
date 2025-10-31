@@ -23,7 +23,7 @@ dnf makecache
 dnf update -y
 dnf install -y epel-release
 dnf config-manager --enable crb
-dnf install -y glibc-common langpacks-zh_CN dnf-plugins-core dnf-utils dnf-automatic kpatch kpatch-dnf passwd wget net-tools firewalld git git-lfs cockpit cockpit-packagekit cockpit-storaged cockpit-podman zsh util-linux-user ntfs-3g ibus ibus-libpinyin gvim gnome-tweaks gnome-extensions-app thunderbird darktable libreoffice-calc libreoffice-impress libreoffice-writer libreoffice-draw remmina kleopatra vlc qemu-kvm libvirt virt-manager virt-install bridge-utils filezilla firefox
+dnf install -y glibc-common langpacks-zh_CN dnf-plugins-core dnf-utils dnf-automatic kpatch kpatch-dnf passwd wget net-tools firewalld git git-lfs cockpit cockpit-packagekit cockpit-storaged cockpit-podman zsh util-linux-user ntfs-3g ibus ibus-libpinyin gvim gnome-tweaks gnome-extensions-app thunderbird darktable libreoffice-calc libreoffice-impress libreoffice-writer libreoffice-draw remmina kleopatra qemu-kvm libvirt virt-manager virt-install bridge-utils filezilla firefox
 
 # 设置系统语言为简体中文
 localectl set-locale "zh_CN.utf8"
@@ -215,6 +215,7 @@ flatpak install flathub com.moonlight_stream.Moonlight -y
 dnf remove yelp gnome-user-docs evolution -y
 
 # 在 设置 -> Keyboard -> 添加输入源 -> 汉语 (中国) -> 中文 (智能拼音)
+# 在 设置 -> 键盘 -> 移除中文
 # 在 gnome-tweaks 内进行主题配置 -> 应用程序 -> Adwaita-dark
 # 在 设置 -> Keyboard -> 键盘快捷键 -> 截图 -> 复制选区截图到剪贴板 处配置为 Ctrl+Alt+A
 # 在 设置 -> 鼠标和触摸板 -> 触摸板 -> 轻拍以点击 -> 开

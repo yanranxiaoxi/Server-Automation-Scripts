@@ -73,3 +73,9 @@ systemctl enable --now linux-surface-default-watchdog.path
 dnf config-manager --set-disabled fedora fedora-updates
 
 echo "请重启系统以应用 Surface 内核，在重启过程中使用密码 surface 导入内核证书"
+
+# 在 设置 -> 无障碍 -> 始终显示无障碍菜单 -> 开
+# 在 设置 -> 电源 -> 常规 -> 电源按钮行为 -> 电源关闭
+# 在 设置 -> 电源 -> 节电 -> 自动屏幕亮度/屏幕变暗/自动节电 -> 开
+# 在 设置 -> 电源 -> 节电 -> 息屏 -> 从不
+# 在 设置 -> 电源 -> 节电 -> 自动挂起 -> 关

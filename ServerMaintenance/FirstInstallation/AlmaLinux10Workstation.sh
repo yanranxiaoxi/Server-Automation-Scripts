@@ -23,7 +23,7 @@ dnf makecache
 dnf update -y
 dnf install -y epel-release
 dnf config-manager --enable crb
-dnf install -y glibc-common langpacks-zh_CN dnf-plugins-core dnf-utils dnf-automatic kpatch kpatch-dnf passwd wget net-tools firewalld git git-lfs cockpit cockpit-packagekit cockpit-storaged cockpit-podman zsh util-linux-user ntfs-3g ibus ibus-libpinyin gvim gnome-tweaks gnome-extensions-app thunderbird remmina kleopatra vlc qemu-kvm libvirt virt-manager virt-install bridge-utils firefox
+dnf install -y glibc-common langpacks-zh_CN dnf-plugins-core dnf-utils dnf-automatic kpatch kpatch-dnf passwd wget net-tools firewalld git git-lfs cockpit cockpit-packagekit cockpit-storaged cockpit-podman zsh util-linux-user ntfs-3g ibus ibus-libpinyin gvim gnome-tweaks gnome-extensions-app thunderbird remmina kleopatra qemu-kvm libvirt virt-manager virt-install bridge-utils firefox
 
 # 设置系统语言为简体中文
 localectl set-locale "zh_CN.utf8"
@@ -218,12 +218,13 @@ flatpak install flathub org.libreoffice.LibreOffice -y
 # 移除应用
 dnf remove gnome-user-docs -y
 
-# 在 设置 -> Keyboard -> 添加输入源 -> 汉语 (中国) -> 中文 (智能拼音)
-# 在 gnome-tweaks 内进行主题配置 -> 应用程序 -> Adwaita-dark
-# 在 设置 -> Keyboard -> 键盘快捷键 -> 截图 -> 复制选区截图到剪贴板 处配置为 Ctrl+Alt+A
-# 在 设置 -> 鼠标和触摸板 -> 触摸板 -> 轻拍以点击 -> 开
+# 在 设置 -> 键盘 -> 添加输入源 -> 汉语 (中国) -> 中文 (智能拼音)
+# 在 设置 -> 键盘 -> 移除中文
+# 在 设置 -> 外观 -> 样式 -> 暗色
+# 在 设置 -> 键盘 -> 键盘快捷键 -> 截图 -> 交互式截图 处配置为 Ctrl+Alt+A
 # 在 代理账户（xiaoxi）配置 oh-my-zsh
 # 在 Kleopatra 配置证书
 # 在 gnome-tweaks 内配置开机启动程序 -> Thunderbird
 # 在 gnome-tweaks 内配置窗口标题栏 -> 标题栏按钮 -> 最大化/最小化 -> 开
-# 在 gnome-tweaks 内配置顶栏 -> 电池百分比/工作日/日期/秒/周数 -> 开
+# 在 设置 -> 系统 -> 日期和时间 -> 时钟和日历 -> 星期/日期/秒/周数 -> 开
+# 在 设置 -> 电源 -> 常规 -> 显示电量百分比 -> 开
