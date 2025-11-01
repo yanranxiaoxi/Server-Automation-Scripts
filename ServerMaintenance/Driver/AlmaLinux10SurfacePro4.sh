@@ -80,3 +80,4 @@ echo "请重启系统以应用 Surface 内核，在重启过程中使用密码 s
 # 在 设置 -> 电源 -> 节电 -> 自动屏幕亮度/屏幕变暗/自动节电 -> 开
 # 在 设置 -> 电源 -> 节电 -> 息屏 -> 从不
 # 在 设置 -> 电源 -> 节电 -> 自动挂起 -> 关
+# https://extensions.gnome.org/extension/4413/improved-osk/
