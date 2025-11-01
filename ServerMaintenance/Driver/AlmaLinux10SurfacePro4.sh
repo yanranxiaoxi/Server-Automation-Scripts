@@ -18,14 +18,25 @@ fi
 dnf install -y epel-release
 
 # 添加 Linux Surface 仓库
-dnf config-manager --add-repo=https://pkg.surfacelinux.com/fedora/linux-surface.repo
+cat > /etc/yum.repos.d/linux-surface.repo << 'EOF'
+[linux-surface]
+name=linux-surface
+baseurl=https://pkg.surfacelinux.com/fedora/f40/
+enabled=1
+skip_if_unavailable=1
+gpgkey=https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc
+gpgcheck=1
+enabled_metadata=1
+type=rpm-md
+repo_gpgcheck=0
+EOF
 
 # 添加 Fedora 仓库
 cat > /etc/yum.repos.d/fedora.repo << 'EOF'
 [fedora]
-name=Fedora 41 - $basearch
-baseurl=https://mirrors.tuna.tsinghua.edu.cn/fedora/releases/41/Everything/$basearch/os/
-#metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-41&arch=$basearch
+name=Fedora 40 - $basearch
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/fedora/releases/40/Everything/$basearch/os/
+#metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-40&arch=$basearch
 enabled=1
 countme=1
 metadata_expire=7d
@@ -38,9 +49,9 @@ EOF
 # 添加 Fedora Updates 仓库
 cat > /etc/yum.repos.d/fedora-updates.repo << 'EOF'
 [fedora-updates]
-name=Fedora 41 - $basearch - Updates
-baseurl=https://mirrors.tuna.tsinghua.edu.cn/fedora/updates/41/Everything/$basearch/
-#metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f41&arch=$basearch
+name=Fedora 40 - $basearch - Updates
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/fedora/updates/40/Everything/$basearch/
+#metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f40&arch=$basearch
 enabled=1
 countme=1
 repo_gpgcheck=0
@@ -51,17 +62,7 @@ skip_if_unavailable=False
 EOF
 
 # 安装 Surface 内核
-dnf install -y --allowerasing kernel-surface-6.12.* kernel-surface-modules-extra-6.12.* iptsd libwacom-surface
-
-# 安装 DNF versionlock 插件
-dnf install -y 'dnf-command(versionlock)'
-
-# 锁定 kernel-surface 版本不高于 6.12
-dnf versionlock add 'kernel-surface-6.12.*'
-dnf versionlock add 'kernel-surface-core-6.12.*'
-dnf versionlock add 'kernel-surface-modules-6.12.*'
-dnf versionlock add 'kernel-surface-modules-core-6.12.*'
-dnf versionlock add 'kernel-surface-modules-extra-6.12.*'
+dnf install -y --allowerasing kernel-surface kernel-surface-modules-extra iptsd libwacom-surface
 
 # 安装 Surface 内核的安全启动支持
 dnf install -y surface-secureboot
