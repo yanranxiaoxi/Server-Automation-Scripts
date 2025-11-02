@@ -35,8 +35,8 @@ EOF
 cat > /etc/yum.repos.d/fedora.repo << 'EOF'
 [fedora]
 name=Fedora 40 - $basearch
-baseurl=https://mirrors.tuna.tsinghua.edu.cn/fedora/releases/40/Everything/$basearch/os/
-#metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-40&arch=$basearch
+baseurl=https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/40/Everything/$basearch/os/
+metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-40&arch=$basearch
 enabled=1
 countme=1
 metadata_expire=7d
@@ -50,8 +50,8 @@ EOF
 cat > /etc/yum.repos.d/fedora-updates.repo << 'EOF'
 [fedora-updates]
 name=Fedora 40 - $basearch - Updates
-baseurl=https://mirrors.tuna.tsinghua.edu.cn/fedora/updates/40/Everything/$basearch/
-#metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f40&arch=$basearch
+baseurl=https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/40/Everything/$basearch/
+metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f40&arch=$basearch
 enabled=1
 countme=1
 repo_gpgcheck=0
