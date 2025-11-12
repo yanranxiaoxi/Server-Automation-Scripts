@@ -61,8 +61,8 @@ metadata_expire=6h
 skip_if_unavailable=False
 EOF
 
-# 安装 Surface 内核
-dnf install -y --allowerasing kernel-surface kernel-surface-modules-extra iptsd libwacom-surface
+# 安装 Surface 内核及附加驱动
+dnf install -y --allowerasing kernel-surface kernel-surface-modules-extra iptsd libwacom-surface libcamera libcamera-tools libcamera-qcam libcamera-gstreamer libcamera-ipa pipewire-plugin-libcamera
 
 # 安装 Surface 内核的安全启动支持
 dnf install -y surface-secureboot

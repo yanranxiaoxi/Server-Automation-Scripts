@@ -36,6 +36,7 @@
   - [安装 NVIDIA 驱动程序 / installNvidiaDriver](#安装-nvidia-驱动程序--installnvidiadriver)
   - [安装 Tailscale / installTailscale](#安装-tailscale--installtailscale)
   - [安装 Tailnet DERP 服务器 / installTailnetDerpServer](#安装-tailnet-derp-服务器--installtailnetderpserver)
+  - [安装 Tor 浏览器 / installTorBrowser](#安装-tor-浏览器--installtorbrowser)
 - [Podman 容器管理 / Podman](#podman-容器管理--podman)
   - [禁用自动升级定时器 / disableAutoUpdateTimer](#禁用自动升级定时器--disableautoupdatetimer)
   - [启用新容器的自动升级 / newAutoUpdateContainer](#启用新容器的自动升级--newautoupdatecontainer)
@@ -82,31 +83,31 @@ curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupContainerToS3.
 #### 将 MariaDB 10 数据库备份到 S3 / backupMariaDB10DatabaseToS3
 
 ```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB10DatabaseToS3.sh | sudo bash -s -- "${serverName}" "podman" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB10DatabaseToS3.sh | sudo bash -s -- "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
 ```
 
 #### 将 MariaDB 11 数据库备份到 S3 / backupMariaDB11DatabaseToS3
 
 ```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB11DatabaseToS3.sh | sudo bash -s -- "${serverName}" "podman" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupMariaDB11DatabaseToS3.sh | sudo bash -s -- "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
 ```
 
 #### 将 PostgreSQL 14 数据库备份到 S3 / backupPostgreSQL14DatabaseToS3
 
 ```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupPostgreSQL14DatabaseToS3.sh | sudo bash -s -- "${serverName}" "podman" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupPostgreSQL14DatabaseToS3.sh | sudo bash -s -- "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
 ```
 
 #### 将 PostgreSQL 16 数据库备份到 S3 / backupPostgreSQL16DatabaseToS3
 
 ```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupPostgreSQL16DatabaseToS3.sh | sudo bash -s -- "${serverName}" "podman" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupPostgreSQL16DatabaseToS3.sh | sudo bash -s -- "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
 ```
 
 #### 将 PostgreSQL 17 数据库备份到 S3 / backupPostgreSQL17DatabaseToS3
 
 ```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupPostgreSQL17DatabaseToS3.sh | sudo bash -s -- "${serverName}" "podman" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Backup/backupPostgreSQL17DatabaseToS3.sh | sudo bash -s -- "${serverName}" "${containerName}" "${databaseUser}" "${databasePassword}" "${s3BucketName}" "${s3StorageClass}" "${timerTime}"
 ```
 
 ### 操作系统初始化配置 / FirstInstallation
@@ -250,6 +251,12 @@ curl -fsSL https://sh.soraharu.com/ServerMaintenance/Model/installTailscale.sh |
 
 ```bash
 curl -fsSL https://sh.soraharu.com/ServerMaintenance/Model/installTailnetDerpServer.sh | sudo bash -s -- "${derpDomain}"
+```
+
+#### 安装 Tor 浏览器 / installTorBrowser
+
+```bash
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Model/installTorBrowser.sh | sudo bash
 ```
 
 ### Podman 容器管理 / Podman
