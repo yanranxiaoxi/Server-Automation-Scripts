@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Model - installTorBrowser
+# Model - installTor
 #
-# 安装 Tor 浏览器
+# 安装 Tor
 #
 # Author:	XiaoXi<admin@soraharu.com>
 # Website:	https://sh.soraharu.com/
@@ -35,7 +35,7 @@ fi
 
 echo "检测到操作系统：${OS_TYPE} ${OS_VERSION}"
 
-# 安装 Tor 浏览器
+# 安装 Tor
 
 # 添加 EPEL 仓库（仅 RHEL 系列需要）
 if [ "${OS_TYPE}" = "rhel" ]; then
@@ -67,5 +67,5 @@ EOF
 	rpm --import https://tor-rpm.cdn.soraharu.com/fedora/public_gpg.key
 fi
 
-# 安装 Tor 浏览器
+# 安装 Tor
 dnf install tor -y

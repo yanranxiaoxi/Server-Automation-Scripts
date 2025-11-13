@@ -36,7 +36,7 @@
   - [安装 NVIDIA 驱动程序 / installNvidiaDriver](#安装-nvidia-驱动程序--installnvidiadriver)
   - [安装 Tailscale / installTailscale](#安装-tailscale--installtailscale)
   - [安装 Tailnet DERP 服务器 / installTailnetDerpServer](#安装-tailnet-derp-服务器--installtailnetderpserver)
-  - [安装 Tor 浏览器 / installTorBrowser](#安装-tor-浏览器--installtorbrowser)
+  - [安装 Tor / installTor](#安装-tor--installtor)
 - [Podman 容器管理 / Podman](#podman-容器管理--podman)
   - [禁用自动升级定时器 / disableAutoUpdateTimer](#禁用自动升级定时器--disableautoupdatetimer)
   - [启用新容器的自动升级 / newAutoUpdateContainer](#启用新容器的自动升级--newautoupdatecontainer)
@@ -253,10 +253,10 @@ curl -fsSL https://sh.soraharu.com/ServerMaintenance/Model/installTailscale.sh |
 curl -fsSL https://sh.soraharu.com/ServerMaintenance/Model/installTailnetDerpServer.sh | sudo bash -s -- "${derpDomain}"
 ```
 
-#### 安装 Tor 浏览器 / installTorBrowser
+#### 安装 Tor / installTor
 
 ```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Model/installTorBrowser.sh | sudo bash
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Model/installTor.sh | sudo bash
 ```
 
 ### Podman 容器管理 / Podman
