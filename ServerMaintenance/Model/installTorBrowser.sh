@@ -44,7 +44,7 @@ fi
 
 # 添加 Tor 仓库
 if [ "${OS_TYPE}" = "rhel" ]; then
-	cat > /etc/yum.repos.d/tor.repo << EOF
+	cat > /etc/yum.repos.d/tor.repo << 'EOF'
 [tor]
 name=Tor for Enterprise Linux $releasever - $basearch
 baseurl=https://tor-rpm.cdn.soraharu.com/centos/$releasever/$basearch
@@ -55,7 +55,7 @@ cost=100
 EOF
 	rpm --import https://tor-rpm.cdn.soraharu.com/centos/public_gpg.key
 elif [ "${OS_TYPE}" = "fedora" ]; then
-	cat > /etc/yum.repos.d/tor.repo << EOF
+	cat > /etc/yum.repos.d/tor.repo << 'EOF'
 [tor]
 name=Tor for Fedora $releasever - $basearch
 baseurl=https://tor-rpm.cdn.soraharu.com/fedora/$releasever/$basearch
