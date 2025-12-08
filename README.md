@@ -23,7 +23,9 @@
 - [证书管理 / Cert](#证书管理--cert)
   - [安装 acme.sh / installAcme](#安装-acmesh--installacme)
   - [使用 Cloudflare DNS API 获取证书 / getCertWithCloudflare](#使用-cloudflare-dns-api-获取证书--getcertwithcloudflare)
+  - [在容器内使用 Cloudflare DNS API 获取证书 / getCertWithCloudflareInContainer](#在容器内使用-cloudflare-dns-api-获取证书--getcertwithcloudFlareincontainer)
   - [安装证书 / installCert](#安装证书--installcert)
+  - [在容器内安装证书 / installCertInContainer](#在容器内安装证书--installcertincontainer)
 - [DNS 管理 / DNS](#dns-管理--dns)
   - [设置 AdGuard DNS / setAdGuard](#设置-adguard-dns--setadguard)
   - [设置 Cloudflare DNS / setCloudflare](#设置-cloudflare-dns--setcloudflare)
@@ -181,10 +183,22 @@ curl -fsSL https://sh.soraharu.com/ServerMaintenance/Cert/installAcme.sh | sudo 
 curl -fsSL https://sh.soraharu.com/ServerMaintenance/Cert/getCertWithCloudflare.sh | sudo bash -s -- "${domainName}" "${cloudflareToken}" "${cloudflareAccountID}"
 ```
 
+#### 在容器内使用 Cloudflare DNS API 获取证书 / getCertWithCloudflareInContainer
+
+```bash
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Cert/getCertWithCloudflareInContainer.sh | sudo bash -s -- "${domainName}" "podman" "acme-sh"
+```
+
 #### 安装证书 / installCert
 
 ```bash
 curl -fsSL https://sh.soraharu.com/ServerMaintenance/Cert/installCert.sh | sudo bash -s -- "${domainName}" "${fullChainFilePath}" "${privateKeyFilePath}" "${reloadCommand}"
+```
+
+#### 在容器内安装证书 / installCertInContainer
+
+```bash
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Cert/installCertInContainer.sh | sudo bash -s -- "${domainName}" "${fullChainFilePath}" "${privateKeyFilePath}" "${reloadCommand}" "podman" "acme-sh"
 ```
 
 ### DNS 管理 / DNS
