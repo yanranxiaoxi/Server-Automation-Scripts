@@ -27,4 +27,4 @@ if [[ "${containerType}" != "podman" && "${containerType}" != "docker" ]]; then
 fi
 
 # 获取证书
-"${containerType}" exec "${containerNameOrID}" --issue --dns dns_cf -d "${domainName}" --standalone
+"${containerType}" exec "${containerNameOrID}" --issue --dns dns_cf -d "${domainName}"
