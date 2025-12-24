@@ -340,7 +340,7 @@ curl -fsSL https://sh.soraharu.com/Container/elasticsearch/sysctl.sh | sudo bash
 curl -fsSL https://sh.soraharu.com/Container/gitlab/cron.sh | sudo bash
 ```
 
-#### 更新 GitLab nginx real_ip_trusted_addresses 配置 / updateRealIpTrustedAddresses
+#### 自动更新 GitLab real_ip 配置 / updateRealIpTrustedAddresses
 
 ```bash
 curl -fsSL https://sh.soraharu.com/Container/gitlab/updateRealIpTrustedAddresses.sh | sudo bash -s -- "${providers}" "podman"
