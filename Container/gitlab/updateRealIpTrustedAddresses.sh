@@ -14,7 +14,7 @@ providers=${1:-"Private"}
 # 容器类型，'podman' 或是 'docker'
 containerType=${2:-"podman"}
 
-GITLAB_RB="/etc/gitlab/gitlab.rb"
+GITLAB_RB="/${containerType}directory/gitlab/config/gitlab.rb"
 API_URL="https://cdn-ips.api.soraharu.com/?providers=${providers}&format=single-quote-comma"
 
 echo "正在从 API 获取 IP 地址列表..."
