@@ -18,7 +18,7 @@ GITLAB_RB="/${containerType}directory/gitlab/config/gitlab.rb"
 API_URL="https://cdn-ips.api.soraharu.com/?providers=${providers}&format=single-quote-comma"
 
 echo "正在从 API 获取 IP 地址列表..."
-IP_ADDRESSES=$(curl -s "$API_URL")
+IP_ADDRESSES=$(curl -s "$API_URL" | tr -d '\r')
 
 if [ -z "$IP_ADDRESSES" ]; then
 	echo "错误：无法从 API 获取 IP 地址列表"
@@ -32,6 +32,9 @@ NEW_CONFIG="nginx['real_ip_trusted_addresses'] = [ $IP_ADDRESSES ]"
 
 # 使用 sed 替换配置
 sed -i "/^nginx\['real_ip_trusted_addresses'\]/c\\$NEW_CONFIG" "$GITLAB_RB"
+
+# 移除可能引入的 Windows 换行符
+sed -i 's/\r$//' "$GITLAB_RB"
 
 echo "配置已更新"
 echo "新配置为："
