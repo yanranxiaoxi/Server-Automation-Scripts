@@ -11,7 +11,7 @@
 # 服务器名称（对应 S3 中的路径）
 serverName=$1
 # 容器类型，'podman' 或是 'docker'
-containerType=$2
+containerType=${2:-podman}
 # S3 Access Key
 s3AccessKey=$3
 # S3 Secret Key
@@ -19,9 +19,9 @@ s3SecretKey=$4
 # S3 API 地址
 s3ApiAddress=$5
 # S3 桶名称
-s3BucketName=$6
+s3BucketName=${6:-backup-container}
 # S3 存储类
-s3StorageClass=$7
+s3StorageClass=${7:-Standard}
 # 定时任务执行时刻
 timerTime=$8
 
@@ -29,15 +29,6 @@ timerTime=$8
 if [[ -z "${serverName}" || -z "${s3AccessKey}" || -z "${s3SecretKey}" || -z "${s3ApiAddress}" ]]; then
 	echo "错误：输入变量不正确"
 	exit 1
-fi
-if [[ -z "${containerType}" ]]; then
-	containerType="podman"
-fi
-if [[ -z "${s3BucketName}" ]]; then
-	s3BucketName="backup-container"
-fi
-if [[ -z "${s3StorageClass}" ]]; then
-	s3StorageClass="Standard"
 fi
 if [[ -z "${timerTime}" || "${timerTime}" == "0" ]]; then
 	timerTime='0 3 * * *'

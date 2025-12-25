@@ -15,37 +15,22 @@
 # 服务器名称（对应 S3 中的路径）
 serverName=$1
 # 容器名称
-containerName=$2
+containerName=${2:-postgres17}
 # 数据库用户名
-databaseUser=$3
+databaseUser=${3:-postgres}
 # 数据库密码（可以为空）
 databasePassword=$4
 # S3 桶名称
-s3BucketName=$5
+s3BucketName=${5:-backup-database}
 # S3 存储类
-s3StorageClass=$6
+s3StorageClass=${6:-Standard}
 # 定时任务执行时刻
-timerTime=$7
+timerTime=${7:-"35 4 * * *"}
 
 # 检查变量
 if [[ -z "${serverName}" ]]; then
 	echo "错误：输入变量不正确"
 	exit 1
-fi
-if [[ -z "${containerName}" ]]; then
-	containerName="postgres17"
-fi
-if [[ -z "${databaseUser}" ]]; then
-	databaseUser="postgres"
-fi
-if [[ -z "${s3BucketName}" ]]; then
-	s3BucketName="backup-database"
-fi
-if [[ -z "${s3StorageClass}" ]]; then
-	s3StorageClass="Standard"
-fi
-if [[ -z "${timerTime}" ]]; then
-	timerTime='35 4 * * *'
 fi
 
 # 检查环境
