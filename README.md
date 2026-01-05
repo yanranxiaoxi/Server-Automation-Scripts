@@ -63,13 +63,15 @@
   - [定时任务 / cron](#定时任务--cron-2)
 - [image-transfer-station](#image-transfer-station)
   - [定时任务 / cron](#定时任务--cron-3)
-- [keycloak](#keycloak)
+- [jitsi-jvb](#jitsi-jvb)
   - [系统内核参数配置 / sysctl](#系统内核参数配置--sysctl-1)
+- [keycloak](#keycloak)
+  - [系统内核参数配置 / sysctl](#系统内核参数配置--sysctl-2)
 - [mastodon](#mastodon)
   - [定时任务 / cron](#定时任务--cron-4)
-  - [系统内核参数配置 / sysctl](#系统内核参数配置--sysctl-2)
-- [redis](#redis)
   - [系统内核参数配置 / sysctl](#系统内核参数配置--sysctl-3)
+- [redis](#redis)
+  - [系统内核参数配置 / sysctl](#系统内核参数配置--sysctl-4)
 - [typecho](#typecho)
   - [定时任务 / cron](#定时任务--cron-5)
 
@@ -368,6 +370,14 @@ curl -fsSL https://sh.soraharu.com/Container/gitlab-runner/cron.sh | sudo bash
 
 ```bash
 curl -fsSL https://sh.soraharu.com/Container/image-transfer-station/cron.sh | sudo bash
+```
+
+### jitsi-jvb
+
+#### 系统内核参数配置 / sysctl
+
+```bash
+curl -fsSL https://sh.soraharu.com/Container/jitsi-jvb/sysctl.sh | sudo bash
 ```
 
 ### keycloak
