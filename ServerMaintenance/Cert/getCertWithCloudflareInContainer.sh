@@ -8,7 +8,7 @@
 # Website:	https://sh.soraharu.com/
 # License:	MIT License
 
-# 域名
+# 域名（支持以逗号分隔的多个域名）
 domainName=$1
 # Container Type
 containerType=${2:-podman}
@@ -26,5 +26,16 @@ if [[ "${containerType}" != "podman" && "${containerType}" != "docker" ]]; then
 	exit 1
 fi
 
+# 构建域名参数
+domainArgs=()
+IFS=',' read -ra domains <<< "${domainName}"
+for domain in "${domains[@]}"; do
+	# 去除可能存在的首尾空格
+	domain=$(echo "${domain}" | xargs)
+	if [[ -n "${domain}" ]]; then
+		domainArgs+=(-d "${domain}")
+	fi
+done
+
 # 获取证书
-"${containerType}" exec "${containerNameOrID}" --issue --dns dns_cf -d "${domainName}"
+"${containerType}" exec "${containerNameOrID}" --issue --dns dns_cf "${domainArgs[@]}"

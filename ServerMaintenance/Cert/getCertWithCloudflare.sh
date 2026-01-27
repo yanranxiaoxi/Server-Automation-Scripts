@@ -8,7 +8,7 @@
 # Website:	https://sh.soraharu.com/
 # License:	MIT License
 
-# 域名
+# 域名（支持以逗号分隔的多个域名）
 domainName=$1
 # Cloudflare Token
 cloudflareToken=$2
@@ -27,5 +27,16 @@ if [[ -n "${cloudflareToken}" ]] && [[ -n "${cloudflareAccountID}" ]]; then
 	export CF_Account_ID="${cloudflareAccountID}"
 fi
 
+# 构建域名参数
+domainArgs=()
+IFS=',' read -ra domains <<< "${domainName}"
+for domain in "${domains[@]}"; do
+	# 去除可能存在的首尾空格
+	domain=$(echo "${domain}" | xargs)
+	if [[ -n "${domain}" ]]; then
+		domainArgs+=(-d "${domain}")
+	fi
+done
+
 # 获取证书
-~/.acme.sh/acme.sh --issue --dns dns_cf -d "${domainName}"
+~/.acme.sh/acme.sh --issue --dns dns_cf "${domainArgs[@]}"
