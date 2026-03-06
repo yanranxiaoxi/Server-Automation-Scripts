@@ -112,10 +112,10 @@ firewall-cmd --reload
 
 # Run!
 tailscale up \
+	--reset \
 	--login-server="${loginServer}" \
 	--authkey="${authKey}" \
 	--advertise-exit-node \
-	--advertise-tags="${advertiseTags}" \
 	--accept-dns="${acceptDNS}" \
 	--accept-routes="${acceptRoutes}"
 
