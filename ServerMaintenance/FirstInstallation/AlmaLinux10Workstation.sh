@@ -23,7 +23,7 @@ dnf makecache
 dnf update -y
 dnf install -y epel-release
 dnf config-manager --enable crb
-dnf install -y glibc-common langpacks-zh_CN dnf-plugins-core dnf-utils dnf-automatic kpatch kpatch-dnf passwd wget net-tools firewalld git git-lfs cockpit cockpit-packagekit cockpit-storaged cockpit-podman zsh util-linux-user ntfs-3g ibus ibus-libpinyin gvim gnome-tweaks gnome-extensions-app thunderbird remmina kleopatra qemu-kvm libvirt virt-manager virt-install bridge-utils firefox
+dnf install -y glibc-common langpacks-zh_CN dnf-plugins-core dnf-utils dnf-automatic kpatch kpatch-dnf passwd wget net-tools firewalld git git-lfs cockpit cockpit-packagekit cockpit-storaged cockpit-podman zsh util-linux-user ntfs-3g ibus ibus-libpinyin gvim gnome-tweaks gnome-extensions-app thunderbird remmina kleopatra qemu-kvm libvirt virt-manager virt-install bridge-utils firefox speech-dispatcher speech-dispatcher-utils
 
 # 设置系统语言为简体中文
 localectl set-locale "zh_CN.utf8"
