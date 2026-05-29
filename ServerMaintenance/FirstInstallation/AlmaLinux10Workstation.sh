@@ -108,6 +108,15 @@ systemctl enable netavark-firewalld-reload.service
 # Podman 新建 IPv6 网关
 podman network create --ipv6 --gateway fd00::1:8:1 --subnet fd00::1:8:0/112 --gateway 10.90.0.1 --subnet 10.90.0.0/16 podman1
 
+# 启用 Podman 自动更新定时器单元
+# 自动更新将于每周一凌晨 1:00 自动运行
+systemctl enable --now podman-auto-update.timer
+mkdir -p /etc/systemd/system/podman-auto-update.timer.d/
+echo "[Timer]" >/etc/systemd/system/podman-auto-update.timer.d/time.conf
+echo "OnBootSec=" >>/etc/systemd/system/podman-auto-update.timer.d/time.conf
+echo "OnCalendar=mon 01:00" >>/etc/systemd/system/podman-auto-update.timer.d/time.conf
+systemctl daemon-reload
+
 # 将默认 Shell 设置为 Zsh
 chsh -s "$(which zsh)"
 
