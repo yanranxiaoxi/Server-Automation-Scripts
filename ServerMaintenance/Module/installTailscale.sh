@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Model - installTailscale
+# Module - installTailscale
 #
 # 安装 Tailscale
 #
@@ -36,11 +36,9 @@ esac
 
 acceptDNS=false
 acceptRoutes=false
-advertiseTags="tag:server"
 if [[ "${isJumpServer}" == "true" ]]; then
 		acceptDNS=true
 		acceptRoutes=true
-		advertiseTags="tag:jump-server"
 fi
 
 # 检测 RHEL 主版本

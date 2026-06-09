@@ -238,18 +238,18 @@ curl -fsSL https://sh.soraharu.com/ServerMaintenance/DNS/setYandex.sh | sudo bas
 curl -fsSL https://sh.soraharu.com/ServerMaintenance/Driver/AlmaLinux10SurfacePro4.sh | sudo bash
 ```
 
-### 额外模块 / Model
+### 额外模块 / Module
 
 #### 安装 Microsoft Edge 浏览器 / installMicrosoftEdge
 
 ```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Model/installMicrosoftEdge.sh | sudo bash
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Module/installMicrosoftEdge.sh | sudo bash
 ```
 
 #### 安装 NVIDIA 驱动程序 / installNvidiaDriver
 
 ```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Model/installNvidiaDriver.sh | sudo bash
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Module/installNvidiaDriver.sh | sudo bash
 ```
 
 脚本执行完成后续执行：
@@ -261,19 +261,19 @@ curl -fsSL https://sh.soraharu.com/ServerMaintenance/Model/installNvidiaDriver.s
 #### 安装 Tailscale / installTailscale
 
 ```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Model/installTailscale.sh | sudo bash -s -- "${authKey}" "${loginServer}" "${isJumpServer}"
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Module/installTailscale.sh | sudo bash -s -- "${authKey}" "${loginServer}" "${isJumpServer}"
 ```
 
 #### 安装 Tailnet DERP 服务器 / installTailnetDerpServer
 
 ```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Model/installTailnetDerpServer.sh | sudo bash -s -- "${derpDomain}"
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Module/installTailnetDerpServer.sh | sudo bash -s -- "${derpDomain}"
 ```
 
 #### 安装 Tor / installTor
 
 ```bash
-curl -fsSL https://sh.soraharu.com/ServerMaintenance/Model/installTor.sh | sudo bash
+curl -fsSL https://sh.soraharu.com/ServerMaintenance/Module/installTor.sh | sudo bash
 ```
 
 ### Podman 容器管理 / Podman

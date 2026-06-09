@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Model - installTailnetDerpServer
+# Module - installTailnetDerpServer
 #
 # 安装 Tailnet DERP 服务器
 #

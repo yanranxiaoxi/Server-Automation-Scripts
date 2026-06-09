@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Model - installNvidiaDriver
+# Module - installNvidiaDriver
 #
 # 安装 NVIDIA 驱动程序
 #

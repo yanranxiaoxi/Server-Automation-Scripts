@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Model - installMicrosoftEdge
+# Module - installMicrosoftEdge
 #
 # 安装 Microsoft Edge 浏览器
 #

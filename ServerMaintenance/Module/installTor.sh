@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Model - installTor
+# Module - installTor
 #
 # 安装 Tor
 #
