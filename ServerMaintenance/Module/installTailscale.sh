@@ -34,10 +34,8 @@ case "${isJumpServer}" in
 		;;
 esac
 
-acceptDNS=false
 acceptRoutes=false
 if [[ "${isJumpServer}" == "true" ]]; then
-		acceptDNS=true
 		acceptRoutes=true
 fi
 
@@ -114,7 +112,7 @@ tailscale up \
 	--login-server="${loginServer}" \
 	--authkey="${authKey}" \
 	--advertise-exit-node \
-	--accept-dns="${acceptDNS}" \
+	--accept-dns=true \
 	--accept-routes="${acceptRoutes}"
 
 # 配置防火墙，仅允许 Tailscale 网段访问 SSH 和 Cockpit
