@@ -56,8 +56,6 @@ if [ ! -f "/${containerType}directorybackup/mc" ]; then
 		mcDownloadUrl="https://dl.min.io/aistor/mc/release/linux-amd64/mc"
 	elif [[ ${cpuArch} =~ "aarch64" ]]; then
 		mcDownloadUrl="https://dl.min.io/aistor/mc/release/linux-arm64/mc"
-	elif [[ ${cpuArch} =~ "ppc64le" ]]; then
-		mcDownloadUrl="https://dl.min.io/client/mc/release/linux-ppc64le/mc"
 	else
 		echo "Fatal error: unsupported CPU architecture!"
 		exit 1
