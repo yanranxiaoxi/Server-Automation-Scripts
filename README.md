@@ -56,7 +56,7 @@
   - [系统内核参数配置 / sysctl](#系统内核参数配置--sysctl)
 - [gitlab](#gitlab)
   - [定时任务 / cron](#定时任务--cron)
-  - [更新 GitLab nginx real_ip_trusted_addresses 配置 / updateRealIpTrustedAddresses](#更新-gitlab-nginx-real_ip_trusted_addresses-配置--updaterealiptrustedaddresses)
+  - [更新 GitLab cdn_ip_ranges 配置 / updateRealIpTrustedAddresses](#更新-gitlab-cdn_ip_ranges-配置--updaterealiptrustedaddresses)
 - [gitlab-pages](#gitlab-pages)
   - [定时任务 / cron](#定时任务--cron-1)
 - [gitlab-runner](#gitlab-runner)
@@ -342,7 +342,7 @@ curl -fsSL https://sh.soraharu.com/Container/elasticsearch/sysctl.sh | sudo bash
 curl -fsSL https://sh.soraharu.com/Container/gitlab/cron.sh | sudo bash
 ```
 
-#### 自动更新 GitLab real_ip 配置 / updateRealIpTrustedAddresses
+#### 自动更新 GitLab cdn_ip_ranges 配置 / updateRealIpTrustedAddresses
 
 ```bash
 curl -fsSL https://sh.soraharu.com/Container/gitlab/updateRealIpTrustedAddresses.sh | sudo bash -s -- "${providers}" "podman"
